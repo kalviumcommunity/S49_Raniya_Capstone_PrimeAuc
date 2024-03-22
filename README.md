@@ -14,5 +14,3 @@ The project will be built using the MERN stack, which includes:
 - **React**: Frontend library for building interactive user interfaces.
 - **Node.js**: JavaScript runtime for server-side development.
 
-## Task Planner
-- **Day 1**:Setting up Git repository,Adding Readme File.
