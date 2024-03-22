@@ -24,7 +24,7 @@ async function connectToDB() {
 }
 
 // Test endpoint
-app.get('/test', (req, res) => {
+app.get('/test',(req, res) => {
     res.json({ "message": "e-auctioning platform" });
 });
 
