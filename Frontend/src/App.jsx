@@ -1,14 +1,26 @@
 import React from "react";
 import "./App.css";
-import { Button } from "react-bootstrap";
+import { Routes, Route } from "react-router-dom";
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
+import HomeView from "./Components/HomeView";
+import About from "./Components/About";
+import FAQ from "./Components/FAQ";
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <h2>E-AUCTIONING PLATFORM</h2>
-      <Button variant="primary">Primary Button</Button>
+    <div className="app-wrapper d-flex flex-column">
+      <Header />
+      <main className="flex-grow-1">
+        <Routes>
+          <Route path="/" element={<HomeView />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/FAQ" element={<FAQ />} />
+        </Routes>
+      </main>
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
