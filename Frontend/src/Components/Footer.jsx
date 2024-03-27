@@ -1,10 +1,11 @@
+// Footer.jsx
 import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-dark text-white">
+    <footer className="bg_primary">
       <div className="container">
-        <p>&copy; 2024 E-Auctioning Platform. All rights reserved.</p>
+        <p className="text-white">&copy; 2024 E-Auctioning Platform. All rights reserved.</p>
       </div>
     </footer>
   );

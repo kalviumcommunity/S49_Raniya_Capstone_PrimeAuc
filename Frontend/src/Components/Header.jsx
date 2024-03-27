@@ -1,27 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from React Router
+import { Link } from 'react-router-dom'; // Assuming you're using React Router for navigation
 
 const Header = () => {
-    return (
-        <header className="bg-dark text-white">
-            <div className="container">
-                <div className="row">
-                    <div className="col">
-                       <img src="" alt="logo" />
-                    </div>
-                    <div className="col-auto">
-                        <nav>
-                            <ul className="nav">
-                                <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
-                                <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
-                                <li className="nav-item"><Link className="nav-link" to="/FAQ">FAQ</Link></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </header>
-    );
-}
+  return (
+    <header className="header">
+      <div className="logo-container">
+        <Link to="/path">
+          <img src="" alt="Logo" className="logo" />
+        </Link>
+      </div>
+      <div className="login-container">
+        {/* <Link to="/help" >Help</Link> */}
+        <Link to="/login" className="login-link"> <button className="login-button">Login</button></Link>
+      </div>
+    </header>
+  );
+};
 
 export default Header;
