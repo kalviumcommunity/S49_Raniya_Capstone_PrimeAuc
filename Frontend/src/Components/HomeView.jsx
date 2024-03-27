@@ -1,3 +1,4 @@
+// HomeView.jsx
 import React from "react";
 
 const HomeView = () => {
