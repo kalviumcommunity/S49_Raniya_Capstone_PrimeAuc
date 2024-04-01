@@ -2,6 +2,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require("dotenv").config();
+const {UserModel, userSchema}=require('./models/User');
+
+// Import routes after defining the MongoDB client
+const routes = require("./routes");
 
 // Creating an Express app
 const app = express();
@@ -22,11 +26,8 @@ async function connectToDB() {
         throw error;
     }
 }
-
-// Test endpoint
-app.get('/test',(req, res) => {
-    res.json({ "message": "e-auctioning platform" });
-});
+// Routes
+app.use("/", routes); // Mount the routes at the root URL
 
 // Connect to DB and start server
 connectToDB().then(() => {
