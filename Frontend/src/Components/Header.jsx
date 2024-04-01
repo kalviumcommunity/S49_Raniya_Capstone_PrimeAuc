@@ -11,7 +11,7 @@ const Header = () => {
       </div>
       <div className="login-container">
         {/* <Link to="/help" >Help</Link> */}
-        <Link to="/login" className="login-link"> <button className="login-button">Login</button></Link>
+        <Link to="/login" className="login-link"> <button className="login-button">Log IN</button></Link>
       </div>
     </header>
   );

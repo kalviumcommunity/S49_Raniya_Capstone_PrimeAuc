@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import HomeView from "./Components/HomeView";
+import Login from "./Components/Login";
 // import About from "./Components/About";
 // import Help from "./Components/Help";
 
@@ -15,7 +16,8 @@ const App = () => {
       <main className="flex-grow-1">
         <Routes>
           <Route path="/" element={<HomeView />} />
-          <Route path="/login" element={<HomeView />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Login/>} />
         </Routes>
       </main>
       <Footer />
