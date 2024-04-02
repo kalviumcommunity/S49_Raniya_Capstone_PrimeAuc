@@ -2,13 +2,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require("dotenv").config();
-const {UserModel, userSchema}=require('./models/User');
 
+const bodyParser=require('body-parser');
 // Import routes after defining the MongoDB client
 const routes = require("./routes");
 
 // Creating an Express app
 const app = express();
+app.use(bodyParser.json());
+const cors = require("cors");
+app.use(cors());
 
 // Setting the server port
 const port = process.env.PUBLIC_PORT || 3000;
