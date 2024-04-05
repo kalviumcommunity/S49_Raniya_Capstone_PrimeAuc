@@ -3,8 +3,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 require("dotenv").config();
 
+const bodyParser=require('body-parser');
+// Import routes after defining the MongoDB client
+const routes = require("./routes");
+
 // Creating an Express app
 const app = express();
+app.use(bodyParser.json());
+const cors = require("cors");
+app.use(cors());
 
 // Setting the server port
 const port = process.env.PUBLIC_PORT || 3000;
@@ -22,11 +29,8 @@ async function connectToDB() {
         throw error;
     }
 }
-
-// Test endpoint
-app.get('/test',(req, res) => {
-    res.json({ "message": "e-auctioning platform" });
-});
+// Routes
+app.use("/", routes); // Mount the routes at the root URL
 
 // Connect to DB and start server
 connectToDB().then(() => {
