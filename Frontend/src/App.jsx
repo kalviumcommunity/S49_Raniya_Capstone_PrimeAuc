@@ -6,7 +6,7 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import HomeView from "./Components/HomeView";
 import Login from "./Components/Login";
-// import About from "./Components/About";
+import AuctionItemsList from "./Components/AuctionItemsList";
 // import Help from "./Components/Help";
 
 const App = () => {
@@ -18,6 +18,7 @@ const App = () => {
           <Route path="/" element={<HomeView />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Login/>} />
+          <Route path="/auctionitemlist" element={<AuctionItemsList/>} />
         </Routes>
       </main>
       <Footer />

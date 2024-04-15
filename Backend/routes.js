@@ -3,14 +3,22 @@ const router = express.Router();
 const { UserModel } = require('../Backend/models/User'); // Correct path to user model
 const { signUpSchema, loginSchema } = require('../Backend/models/userValidation');
 const Joi = require('joi');
+const Auction = require('./models/AuctionItem.js');
 
 // Test endpoint
 router.get('/test', (req, res) => {
   res.json({ "message": "e-auctioning platform" });
 });
+router.get('/items', async (req, res) => {
+  try {
+    const items = await Auction.find({});
+    res.json(items);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-
-router.get('/data', async (req, res) => {
+router.get('/users', async (req, res) => {
     try {
         const data = await UserModel.find();
         console.log("Query executed:", data); // Log the query result

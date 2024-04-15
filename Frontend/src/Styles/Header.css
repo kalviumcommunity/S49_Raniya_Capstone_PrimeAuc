@@ -54,12 +54,18 @@
   .login-button:hover:after {
     transform: skew(0,0);
   }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 60px;
-    background-image: linear-gradient(to top, #21689e, #6e90ae);
-    color: #F1EFE7;
+
+
+.small-logo {
+  width: 190px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
 }
+
+
+.navbar-item {
+  flex: 1;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: largeR;
+} 
+
