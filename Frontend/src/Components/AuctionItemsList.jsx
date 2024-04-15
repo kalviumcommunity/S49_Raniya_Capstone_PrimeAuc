@@ -12,15 +12,24 @@ function AuctionItemsList() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/items");
-      setItems(response.data);
-      handleFilter("All"); // Call handleFilter with "All" when items are fetched
+             await axios.get("http://localhost:3000/items").then((res)=>{
+        setItems(res.data);
+      })
+     
+     
+      // console.log(items,"inside fetch",response.data)
+   
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
+  useEffect(()=>{
+     handleFilter("All")
+  },[items])
+
   const handleFilter = (category) => {
+    console.log("calling onload 1st",category,items)
     let array = [];
     if (category === "All") {
       let x = items.map((item) => {
@@ -32,6 +41,7 @@ function AuctionItemsList() {
           array.push(elem);
         });
       });
+      console.log(array,"onload")
       setFilteredItems(array);
     } else {
       const filtered = items.find((item) => item.category === category);
@@ -58,15 +68,7 @@ function AuctionItemsList() {
         {filteredItems.map((item) => (
           <div key={item._id}>
             <h3>{item.title}</h3>
-            <img src={item.image} alt={item.title}/>
-            <p>{item.description}</p>
-            <p>Lot Number: {item.lot_no}</p>
-            <p>Reserve Price: {item.reserve_price}</p>
-            <p>Start Time: {item.start_time}</p>
-            <p>End Time: {item.end_time}</p>
-            <p>Status: {item.status}</p>
-            <p>Starting Price: {item.starting_price}</p>
-           
+            <img src={item.image} alt={item.title}/>                       
       </div>
         ))}
       </div>
