@@ -37,7 +37,7 @@ export default function App() {
           </div>
 
           <div className="navbar-item">
-            <Link to="/auction">
+            <Link to="/auctionitemlist">
               <h2>AUCTIONS</h2>
             </Link>
             </div> 
@@ -49,7 +49,7 @@ export default function App() {
 
           <div className="navbar-item">
             <Link to="/help">
-              <h2>HELP</h2>
+              <h2>HOW IT WORKS</h2>
             </Link>
           </div>
           <div className="navbar-end">
