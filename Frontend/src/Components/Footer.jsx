@@ -36,16 +36,18 @@ const Footer = () => {
                         <div className="col-md-6 col-lg-4 col-12 ft-3">
                             <h5>Contact Us</h5>
                             <p><i className="fa-solid fa-phone-volume"></i> +91 7688974456</p>
-                            <p><i className="fa-solid fa-envelope"></i> loxerauctions@gmail.com</p>
+                            <p><i className="fa-solid fa-envelope"></i> loxera@gmail.com</p>
                             <p><i className="fa-solid fa-paper-plane"></i> Bangalore, India.</p>
                         </div>
-                        <div className="col-12">
-                            <div className="copyright">
-                                &copy; 2024 E-Auctioning Platform. All rights reserved
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
+
+                 <div className="col-15">
+                            <div className="copyright">
+                                &copy; 2024 Loxera  E-Auctioning Platform. All rights reserved
+                            </div>
+                        </div>
             </div>
         </>
     )

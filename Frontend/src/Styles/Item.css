@@ -1,0 +1,72 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+
+.pagination-container,
+.selection-container{
+    margin-left: 40%;
+    padding:3%;
+
+}
+  .custom-card {
+    width: calc(29.33% - 30px); /* Adjust width as needed */
+    margin-bottom: 80px; /* Adjust spacing between cards */
+  }
+  
+  .custom-card-image {
+    height: 400px; /* Adjust height as needed */
+    object-fit: cover;
+  }
+  
+
+  .button-container {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .auction-button,
+  .view-details-button {
+    flex: 1;
+  }
+  
+  .view-details-icon {
+    width: 20px; /* Adjust icon size as needed */
+  }
+  
+  .auction-button {
+    width: 100%; /* Full width */
+    background-color: 		#d4af37;/* Light golden color */
+    border-color: bisque;
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black shade with 50% opacity */
+  }
+  
+  .overlay-text {
+    color: white; /* White text color */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .card-title{
+
+    text-align: center;
+
+  }
+
+  .overlay-text {
+    opacity: 0; /* Initially hide the overlay text */
+    transition: opacity 0.3s; /* Add a transition effect for smooth visibility change */
+}
+
+.overlay:hover .overlay-text {
+    opacity: 1; /* Make the overlay text visible when hovering over the parent element */
+}
