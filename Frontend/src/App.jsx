@@ -6,7 +6,10 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import HomeView from "./Components/HomeView";
 import Login from "./Components/Login";
+import Sell from "./Components/Sell";
+import Help from "./Components/Help";
 import AuctionItemsList from "./Components/AuctionItemsList";
+import ItemDetails from "./Components/ItemDetails";
 // import Help from "./Components/Help";
 
 const App = () => {
@@ -18,7 +21,10 @@ const App = () => {
           <Route path="/" element={<HomeView />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Login/>} />
+          <Route path="/sell" element={<Sell/>} />
+          <Route path="/help" element={<Help/>} />
           <Route path="/auctionitemlist" element={<AuctionItemsList/>} />
+          <Route path="/itemdetails/:lotno" element={<ItemDetails/>} />
         </Routes>
       </main>
       <Footer />

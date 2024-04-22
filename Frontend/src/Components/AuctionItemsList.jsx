@@ -13,6 +13,7 @@ import "@coreui/coreui/dist/css/coreui.min.css";
 import "../Styles/Item.css";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { Link } from "react-router-dom";
 
 function AuctionItemsList() {
   const [items, setItems] = useState([]);
@@ -95,7 +96,9 @@ function AuctionItemsList() {
 
       <div className="card-container">
         {filteredItems.map((item) => (
-          <CCard key={item._id} className="custom-card">
+          console.log(item),
+          <CCard className="custom-card">
+            <Link to={`/itemdetails/${item.lot_no}`} className="overlay-link"> 
             <CCardImage
               src={item.image}
               alt={item.title}
@@ -105,6 +108,7 @@ function AuctionItemsList() {
             <CCardImageOverlay className="overlay">
               <CCardTitle className="overlay-text">VIEW DETAILS</CCardTitle>
             </CCardImageOverlay>
+            </Link>
 
             <CCardBody>
               <CCardTitle className="card-title" text-align="center">

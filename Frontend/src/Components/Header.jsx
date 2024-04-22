@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link ,useLocation } from 'react-router-dom';
 import { AppBar, Toolbar, Button, IconButton, Menu, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-
 import logo from "../assets/images/logo.png";
-import backgroundImage from "../assets/images/navbar.jpg"; // Import your background image
+import backgroundImage from "../assets/images/background.jpg"; 
+import sellBackgroundImage from "../assets/images/sellbackground.jpg";// Import your background image
 import "../Styles/Header.css";
 
 export default function App() {
+  const location = useLocation();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -18,9 +19,17 @@ export default function App() {
     setAnchorEl(null);
   };
 
+
+  const getBackgroundImage = () => {
+    if (location.pathname === '/sell' || location.pathname === '/help' ) {
+      return sellBackgroundImage;
+    }
+    return backgroundImage; // Default background image
+  };
+
   return (
     <div className="app-container">
-      <AppBar position="static" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      <AppBar position="static" style={{ backgroundImage: `url(${getBackgroundImage()})` }}>
         <Toolbar>
           <IconButton
             edge="start"

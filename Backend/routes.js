@@ -18,6 +18,27 @@ router.get('/items', async (req, res) => {
   }
 });
 
+router.get('/itemdetails/:lot_no', async (req, res) => {
+  try{
+  const lot_no = req.params.lot_no;
+
+  const items = await Auction.find({}); // Assuming this retrieves an array of objects
+
+// Extract items from each object and concatenate them into a single array
+const allItems = items.reduce((acc, curr) => {
+    // Extract items array from each object and concatenate with accumulator array
+    return acc.concat(curr.items);
+}, []);
+const item = allItems.find(item => item.lot_no === lot_no);
+        if (!item) {
+      return res.status(404).json({ message: 'Item not found' });
+    }
+    res.json(item);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 router.get('/users', async (req, res) => {
     try {
         const data = await UserModel.find();
