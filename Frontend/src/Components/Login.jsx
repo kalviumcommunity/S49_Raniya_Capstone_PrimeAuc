@@ -63,12 +63,12 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div  className="box">
     <div className="login-page">
       {signupSuccess && (
         <p style={{ color: 'green', textAlign: 'center' }}>Signup successful! You can now login.</p>
       )}
-      <h1 style={{ textAlign: "center" }}>{isSignUp ? 'Sign Up' : 'Login'}</h1>
+      {/* <h1 style={{ textAlign: "center" }}>{isSignUp ? 'Sign Up' : 'Login'}</h1> */}
       <div className="form">
         <form className='login-form' onSubmit={handleSubmit}>
           {isSignUp && (

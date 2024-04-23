@@ -69,3 +69,13 @@
   font-size: largeR;
 } 
 
+
+@media screen and (max-width: 768px) {
+  .navbar-item {
+   display:none 
+  }
+
+  .navbar-end {
+    display: none; 
+  }
+}
