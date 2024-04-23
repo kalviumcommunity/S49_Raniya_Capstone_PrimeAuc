@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { Link ,useLocation } from 'react-router-dom';
-import { AppBar, Toolbar, Button, IconButton, Menu, MenuItem } from '@mui/material';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { AppBar, Toolbar, IconButton, Menu, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from "../assets/images/logo.png";
 import backgroundImage from "../assets/images/background.jpg"; 
-import sellBackgroundImage from "../assets/images/sellbackground.jpg";// Import your background image
+import sellBackgroundImage from "../assets/images/sellbackground.jpg"; 
 import "../Styles/Header.css";
 
 export default function App() {
@@ -19,9 +19,8 @@ export default function App() {
     setAnchorEl(null);
   };
 
-
   const getBackgroundImage = () => {
-    if (location.pathname === '/sell' || location.pathname === '/help' ) {
+    if (location.pathname === '/sell' || location.pathname === '/help') {
       return sellBackgroundImage;
     }
     return backgroundImage; // Default background image
@@ -49,8 +48,8 @@ export default function App() {
             <Link to="/auctionitemlist">
               <h2>AUCTIONS</h2>
             </Link>
-            </div> 
-            <div className="navbar-item">
+          </div> 
+          <div className="navbar-item">
             <Link to="/sell">
               <h2>SELL</h2>
             </Link>
@@ -66,8 +65,6 @@ export default function App() {
               <button className='login-button'>LOG IN</button>
             </Link>
           </div>
-         
-
         </Toolbar>
       </AppBar>
       <Menu

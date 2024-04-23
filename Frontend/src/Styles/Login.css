@@ -2,10 +2,29 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
-    width: 360px;
-    /* padding: 8% 0 0; */
-    margin: auto;
+  width: 360px;
+  margin: auto; 
+
+}
+.box{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 200px; 
+  /* transform: translateY(-50%); */
+  margin-top: 200px; 
+}
+
+
+@media screen and (max-width: 768px) {
+  .box,.login-page {
+    margin-top: 100px; /* Adjust margin-top for smaller screens */
+    height: 150px; /* Adjust height for smaller screens */
   }
+}
+
 .form {
     position: relative;
     z-index: 1;

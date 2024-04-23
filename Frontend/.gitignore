@@ -9,6 +9,9 @@ lerna-debug.log*
 
 node_modules
 
+Frontend/src/Components/Login.jsx
+Frontend/src/Styles/Login.css
+
 dist-ssr
 *.local
 
