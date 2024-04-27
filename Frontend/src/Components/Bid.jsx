@@ -68,6 +68,52 @@ function Bid() {
           )}
         </div>
 
+        <div className="bid-form">
+          <h3>Bid Form</h3>
+          <input
+            type="number"
+            value={bidAmount}
+            onChange={handleBidChange}
+            placeholder="Enter bid amount"
+          />
+          <button onClick={handleQuickBid}>Quick Bid</button>
+
+
+
+          <CButton
+            color="primary"
+            onClick={() => setVisible(!visible)}
+            disabled={!bidAmount} // Disable the button if bidAmount is empty
+          >
+            PLACE BID
+          </CButton>
+
+
+          <CModal
+            backdrop="static"
+            visible={visible}
+            onClose={() => setVisible(false)}
+            aria-labelledby="StaticBackdropExampleLabel"
+          >
+            <CModalHeader>
+              <CModalTitle id="StaticBackdropExampleLabel">
+                BID CONFIRMATION
+              </CModalTitle>
+            </CModalHeader>
+            <CModalBody>
+              DO YOU WANT TO PLACE BID OF ₹{bidAmount} FOR THIS LOT?
+            </CModalBody>
+            <CModalFooter>
+              <CButton color="secondary" onClick={() => setVisible(false)}>
+                CANCEL
+              </CButton>
+              <CButton color="primary">CONFIRM</CButton>
+            </CModalFooter>
+          </CModal>
+        </div>
+
+
+
        
       </div>
     </div>
