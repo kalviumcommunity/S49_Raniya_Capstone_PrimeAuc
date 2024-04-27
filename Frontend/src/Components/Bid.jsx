@@ -53,7 +53,7 @@ function Bid() {
           Click here for auction terms and conditions
         </Link>
       </div>
-      {/* <CountdownTimer lotno={lotno} /> */}
+      <CountdownTimer lotno={lotno} />
       <div className="bid-container">
         <div className="details">
           {item && (
