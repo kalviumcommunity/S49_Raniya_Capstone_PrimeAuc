@@ -1,0 +1,38 @@
+@keyframes moveLeftToRight {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  .terms {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* .link11 {
+    position: absolute;
+    /* top: 50%; */
+    /* left: 0; */
+    /* transform: translateY(-50%); */
+    /* animation: moveLeftToRight 5s linear infinite; */
+    /* color: black; */
+    /* Adjust animation duration and timing function as needed */
+
+    .bid-container {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr; /* Two columns with equal width */
+        gap: 20px; /* Gap between columns */
+      }
+      
+      .details {
+        grid-column: 1; /* Place the details section in the first column */
+      }
+      
+      .bid-form {
+        grid-column: 2; /* Place the bid form section in the second column */
+      }
+      
+  
