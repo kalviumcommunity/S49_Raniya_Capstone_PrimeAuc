@@ -1,0 +1,25 @@
+/* CountdownTimer.css */
+
+.countdown-container {
+    text-align: center;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 300px; /* Adjust width as needed */
+    margin: 0 auto;
+  }
+  
+  .timer-heading {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .timer {
+    font-size: 18px;
+  }
+  
+  .loading-text {
+    font-size: 18px;
+    color: #666;
+  }
+  
