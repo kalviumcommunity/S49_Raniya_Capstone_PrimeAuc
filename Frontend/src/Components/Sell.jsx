@@ -3,8 +3,12 @@ import sellbackground from  '../assets/images/sellbackground.jpg';
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import Listitem from '../Components/Listitem';
+import {Link} from 'react-router-dom';
 
 function Sell() {
+
+
   return (
     <div>
       <div className="image" style={{ backgroundImage: `url(${sellbackground})` }}>
@@ -32,6 +36,7 @@ function Sell() {
   <div className="grid-item right-content">
     <h3>Whether you're a seasoned seller or a newcomer to the world of online auctions, our platform offers you the perfect stage to showcase your treasures and connect with eager buyers from around the globe. Set your desired prices, and engage in dynamic bidding wars that drive excitement and value. Join our vibrant community of sellers today and unlock the potential to turn your items into cash while delighting buyers with unique finds.</h3>
   </div>
+  <Link to="/Listitem">Show List Item</Link>
 </div>
 
 

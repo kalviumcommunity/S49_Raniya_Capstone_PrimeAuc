@@ -1,0 +1,25 @@
+/* Styling for the accordion header and body */
+.CAccordionHeader.active {
+    color: red; /* Change the color to red when active */
+  }
+  
+  .CAccordionBody {
+    transition: max-height 0.3s ease; /* Add smooth transition for opening/closing */
+    max-height: 0; /* Initially hide the accordion body */
+    overflow: hidden; /* Hide any overflow content */
+  }
+  
+  .CAccordionItem.active .CAccordionBody {
+    max-height: 500px; /* Set a maximum height for the open accordion body */
+  }
+  
+  /* Styling for the wrapping div */
+  div.small {
+    width: 200px; /* Set the width to 200px */
+  }
+  
+
+  .faq {
+    margin: 10px 20px 15px 25px; /* top right bottom left */
+    padding: 5px 15px; /* top/bottom right/left */
+}
