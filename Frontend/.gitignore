@@ -26,9 +26,9 @@ dist-ssr
 *.sln
 *.sw?
 
-Bid.jsx
+
 Breadcrumb.jsx
-Bid.css
+
 Breadcrumb.css
 Listitem.jsx
 Timer.jsx
