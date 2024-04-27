@@ -62,7 +62,7 @@ function AuctionItemsList() {
       console.log("xyz", category, items);
 
       const filtered = items.find((item) => item.category === category);
-      console.log(filtered.items);
+      // console.log(filtered.items);
       if (filtered) {
         setFilteredItems(filtered.items);
       } else {
@@ -115,10 +115,13 @@ function AuctionItemsList() {
                 {item.title}
               </CCardTitle>
               <div className="button-container">
-                <CButton color="secondary" className="auction-button" href="/">
-                  AUCTION
-                </CButton>
-              </div>
+  <Link to={`/itemdetails/${item.lot_no}`}>
+    <CButton color="secondary" className="auction-button">
+      BID FOR ITEM
+    </CButton>
+  </Link>
+</div>
+
             </CCardBody>
           </CCard>
         ))}

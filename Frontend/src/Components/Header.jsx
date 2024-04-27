@@ -81,7 +81,7 @@ export default function App() {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={handleClose} component={Link} to="/auctions">Auctions</MenuItem>
+        <MenuItem onClick={handleClose} component={Link} to="/auctionitemlist">Auctions</MenuItem>
         <MenuItem onClick={handleClose} component={Link} to="/sell">Sell</MenuItem>
         <MenuItem onClick={handleClose} component={Link} to="/help">Help</MenuItem>
         <MenuItem onClick={handleClose} component={Link} to="/login">Log In</MenuItem>

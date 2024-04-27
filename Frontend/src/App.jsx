@@ -1,15 +1,9 @@
 import React from "react";
 import "./Styles/Header.css";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import Routing from "./Routes";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
-import HomeView from "./Components/HomeView";
-import Login from "./Components/Login";
-import Sell from "./Components/Sell";
-import Help from "./Components/Help";
-import AuctionItemsList from "./Components/AuctionItemsList";
-import ItemDetails from "./Components/ItemDetails";
 // import Help from "./Components/Help";
 
 const App = () => {
@@ -17,15 +11,7 @@ const App = () => {
     <div className="app-wrapper d-flex flex-column">
       <Header />
       <main className="flex-grow-1">
-        <Routes>
-          <Route path="/" element={<HomeView />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Login/>} />
-          <Route path="/sell" element={<Sell/>} />
-          <Route path="/help" element={<Help/>} />
-          <Route path="/auctionitemlist" element={<AuctionItemsList/>} />
-          <Route path="/itemdetails/:lotno" element={<ItemDetails/>} />
-        </Routes>
+        <Routing/>
       </main>
       <Footer />
     </div>
@@ -33,3 +19,8 @@ const App = () => {
 };
 
 export default App;
+
+
+{/* <div className="d-flex justify-content-center">
+  <CSpinner />
+</div> */}

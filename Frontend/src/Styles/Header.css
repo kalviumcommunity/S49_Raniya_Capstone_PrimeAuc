@@ -72,7 +72,7 @@
 
 @media screen and (max-width: 768px) {
   .navbar-item {
-   display:none 
+   display:none;
   }
 
   .navbar-end {

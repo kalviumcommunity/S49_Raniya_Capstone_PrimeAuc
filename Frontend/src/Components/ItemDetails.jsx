@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,Link} from 'react-router-dom';
 import axios from 'axios';
 import { CButton } from '@coreui/react';
 
@@ -28,12 +28,15 @@ function ItemDetails() {
 
   return (
     <div>
-      <h1>Item Details</h1>
-      <h2>{item.title}</h2>
-      <img src={item.image} alt={item.title} />
-      <p>{item.description}</p>
-      <CButton color="secondary" >AUCTION</CButton>
-    </div>
+  <h1>Item Details</h1>
+  <h2>{item.title}</h2>
+  <img src={item.image} alt={item.title} />
+  <p>{item.description}</p>
+  <Link to={`/bid/${item.lot_no}`} >
+    <CButton color="secondary">AUCTION</CButton>
+  </Link>
+</div>
+
   );
 }
 

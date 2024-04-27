@@ -63,21 +63,20 @@
   }
 
   .overlay-text {
-    opacity: 0; /* Initially hide the overlay text */
-    transition: opacity 0.3s; /* Add a transition effect for smooth visibility change */
-}
+    opacity: 0; 
+    transition: opacity 0.3s;}
 
 .overlay:hover .overlay-text {
-    opacity: 1; /* Make the overlay text visible when hovering over the parent element */
+    opacity: 1; 
 }
 @media screen and (max-width: 768px) {
   .custom-card {
-    width: calc(50% - 20px); /* Adjust card width for smaller screens */
+    width: calc(50% - 20px); 
   }
 }
 
 @media screen and (max-width: 480px) {
   .custom-card {
-    width: 100%; /* Display cards in a single column on very small screens */
+    width: 100%; 
   }
 }

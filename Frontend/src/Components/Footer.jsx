@@ -23,13 +23,13 @@ const Footer = () => {
                             <h5>Quick Links</h5>
                             <ul>
                                 <li className="nav-item">
-                                    <a className="" href="/help">Help</a>
+                                    <a className="link" href="/help">Help</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="" href="/auctionitemlist">Auctions</a>
+                                    <a className="link" href="/auctionitemlist">Auctions</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="" href="/sell">Sell</a>
+                                    <a className="link" href="/sell">Sell</a>
                                 </li>
                             </ul>
                         </div>

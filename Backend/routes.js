@@ -9,6 +9,9 @@ const Auction = require('./models/AuctionItem.js');
 router.get('/test', (req, res) => {
   res.json({ "message": "e-auctioning platform" });
 });
+
+
+//get all items
 router.get('/items', async (req, res) => {
   try {
     const items = await Auction.find({});
@@ -18,6 +21,8 @@ router.get('/items', async (req, res) => {
   }
 });
 
+
+//get item by lot no
 router.get('/itemdetails/:lot_no', async (req, res) => {
   try{
   const lot_no = req.params.lot_no;
@@ -39,6 +44,8 @@ const item = allItems.find(item => item.lot_no === lot_no);
   }
 });
 
+
+//get all users
 router.get('/users', async (req, res) => {
     try {
         const data = await UserModel.find();
@@ -50,7 +57,7 @@ router.get('/users', async (req, res) => {
     }
 }); 
 
-// Example route for user signup
+// route for user signup
 router.post('/signup', async (req, res) => {
     console.log(req.body);
   try {
