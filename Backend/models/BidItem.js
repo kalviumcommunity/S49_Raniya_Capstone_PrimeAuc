@@ -35,7 +35,7 @@ const lotJoiSchema = Joi.object({
 });
 
 // Validation function for lot
-function validateLot(lot) {
+ function validateLot(lot) {
   return lotJoiSchema.validate(lot);
 }
 

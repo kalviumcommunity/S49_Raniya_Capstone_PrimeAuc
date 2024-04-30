@@ -12,16 +12,28 @@ import {
 } from "@coreui/react";
 import "../Styles/Bid.css";
 
+import ToastComponent from "./Toast";
+
 function Bid() {
   const { lotno } = useParams();
   const [item, setItem] = useState(null);
   const [bidAmount, setBidAmount] = useState("");
   const [previousBid, setPreviousBid] = useState(0);
-  const [visible, setVisible] = useState(false); // Define visible state
+  const [visible, setVisible] = useState(false);
+  const [bidConfirmed, setBidConfirmed] = useState(false); // State to track bid confirmation
 
   useEffect(() => {
     fetchData();
   }, [lotno]);
+
+  useEffect(() => {
+    if (bidConfirmed) {
+      const timeout = setTimeout(() => {
+        setBidConfirmed(false);
+      }, 1800); // Reset bidConfirmed to false after 3 seconds
+      return () => clearTimeout(timeout); // Cleanup function to clear timeout
+    }
+  }, [bidConfirmed]);
 
   const fetchData = async () => {
     try {
@@ -62,9 +74,9 @@ function Bid() {
         `http://localhost:3000/lots/${lotno}/bids`,
         bid
       );
-      console.log("Bid placed:", response.data); // Log response after declaration
-
-      setVisible(false); // Close the confirmation modal
+      setBidConfirmed(true); // Set bid confirmation to true after successful bid placement
+      console.log("Bid placed:", response.data);
+      setVisible(false);
     } catch (error) {
       console.error("Error placing bid:", error);
     }
@@ -115,7 +127,7 @@ function Bid() {
 
           <CButton
             color="primary"
-            onClick={() => setVisible(true)} // Show the confirmation modal
+            onClick={() => setVisible(true)}
             disabled={!bidAmount}
           >
             PLACE BID
@@ -123,7 +135,7 @@ function Bid() {
 
           <CModal
             backdrop="static"
-            visible={visible} // Control visibility of the modal
+            visible={visible}
             onClose={() => setVisible(false)}
             aria-labelledby="StaticBackdropExampleLabel"
           >
@@ -146,6 +158,7 @@ function Bid() {
           </CModal>
         </div>
       </div>
+      {bidConfirmed && <ToastComponent bidAmount={bidAmount} />} {/* Render the toast when bid is confirmed */}
     </div>
   );
 }
