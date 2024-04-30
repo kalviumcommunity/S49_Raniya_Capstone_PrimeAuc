@@ -9,7 +9,7 @@ import {
   CModalHeader,
   CModalBody,
   CModalTitle,
-} from "@coreui/react"; // Import the Modal component
+} from "@coreui/react";
 import "../Styles/Bid.css";
 
 function Bid() {
@@ -17,11 +17,11 @@ function Bid() {
   const [item, setItem] = useState(null);
   const [bidAmount, setBidAmount] = useState("");
   const [previousBid, setPreviousBid] = useState(0);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false); // Define visible state
 
   useEffect(() => {
     fetchData();
-  }, [lotno]); // Fetch data whenever lotno changes
+  }, [lotno]);
 
   const fetchData = async () => {
     try {
@@ -29,7 +29,6 @@ function Bid() {
         `http://localhost:3000/itemdetails/${lotno}`
       );
       setItem(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -40,10 +39,46 @@ function Bid() {
   };
 
   const handleQuickBid = () => {
-    // Increment the bid amount by 500 from the previous bid
     const newBidAmount = previousBid + 500;
     setBidAmount(newBidAmount.toString());
     setPreviousBid(newBidAmount);
+  };
+
+  const handlePlaceBid = async () => {
+    const ipAddress = await getIPAddress();
+    const userId = localStorage.getItem("userId");
+    const timestamp = new Date().toISOString();
+
+    // Construct bid object
+    const bid = {
+      userbid_no: userId,
+      ip_address: ipAddress,
+      amount: parseInt(bidAmount), // Convert bidAmount to an integer
+      timestamp: timestamp,
+    };
+
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/lots/${lotno}/bids`,
+        bid
+      );
+      console.log("Bid placed:", response.data); // Log response after declaration
+
+      setVisible(false); // Close the confirmation modal
+    } catch (error) {
+      console.error("Error placing bid:", error);
+    }
+  };
+
+  const getIPAddress = async () => {
+    try {
+      const response = await fetch("https://api.ipify.org?format=json");
+      const data = await response.json();
+      return data.ip;
+    } catch (error) {
+      console.error("Error fetching IP address:", error);
+      return null;
+    }
   };
 
   return (
@@ -78,20 +113,17 @@ function Bid() {
           />
           <button onClick={handleQuickBid}>Quick Bid</button>
 
-
-
           <CButton
             color="primary"
-            onClick={() => setVisible(!visible)}
-            disabled={!bidAmount} // Disable the button if bidAmount is empty
+            onClick={() => setVisible(true)} // Show the confirmation modal
+            disabled={!bidAmount}
           >
             PLACE BID
           </CButton>
 
-
           <CModal
             backdrop="static"
-            visible={visible}
+            visible={visible} // Control visibility of the modal
             onClose={() => setVisible(false)}
             aria-labelledby="StaticBackdropExampleLabel"
           >
@@ -107,14 +139,12 @@ function Bid() {
               <CButton color="secondary" onClick={() => setVisible(false)}>
                 CANCEL
               </CButton>
-              <CButton color="primary">CONFIRM</CButton>
+              <CButton color="primary" onClick={handlePlaceBid}>
+                CONFIRM
+              </CButton>
             </CModalFooter>
           </CModal>
         </div>
-
-
-
-       
       </div>
     </div>
   );
