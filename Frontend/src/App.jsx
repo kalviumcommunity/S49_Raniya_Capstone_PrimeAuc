@@ -7,6 +7,7 @@ import Footer from "./Components/Footer";
 // import Help from "./Components/Help";
 
 const App = () => {
+  localStorage.setItem("userId", "biduser1234"); 
   return (
     <div className="app-wrapper d-flex flex-column">
       <Header />

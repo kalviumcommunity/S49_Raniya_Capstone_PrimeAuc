@@ -33,7 +33,7 @@ function ItemDetails() {
   <img src={item.image} alt={item.title} />
   <p>{item.description}</p>
   <Link to={`/bid/${item.lot_no}`} >
-    <CButton color="secondary">AUCTION</CButton>
+    <CButton color="secondary">BID FOR LOT</CButton>
   </Link>
 </div>
 

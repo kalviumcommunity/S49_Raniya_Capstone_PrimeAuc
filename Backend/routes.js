@@ -4,6 +4,50 @@ const { UserModel } = require('../Backend/models/User'); // Correct path to user
 const { signUpSchema, loginSchema } = require('../Backend/models/userValidation');
 const Joi = require('joi');
 const Auction = require('./models/AuctionItem.js');
+const { Lot, validateLot, validateBid } = require('./models/BidItem.js');
+
+// Route to get all bititems and it details
+router.get('/biditems',async(req,res)=>{
+  try{
+    const biditems= await Lot.find();
+    res.json( biditems);
+  }
+  catch(err){
+    res.json(err);
+  }
+})
+
+// Route to create a new bid for a lot
+router.post('/lots/:lot_no/bids', async (req, res) => {
+  const { lot_no } = req.params;
+  console.log('Received request to create bid for lot ID:', lot_no);
+  console.log('Request body:', req.body);
+  
+  try {
+    let lot = await Lot.findOne({ lot_no: lot_no });
+
+    // If the lot doesn't exist, create a new one
+    if (!lot) {
+      console.log('Lot not found, creating a new lot:', lot_no);
+      lot = new Lot({
+        lot_no: lot_no,
+        reserve_price: 0, // Set reserve_price as needed
+        bids: []
+      });
+    }
+
+    // Add the bid to the lot
+    lot.bids.push(req.body);
+    await lot.save();
+
+    console.log('Bid created successfully:', lot);
+    res.status(201).send(lot);
+  } catch (err) {
+    console.error('Error creating bid:', err);
+    res.status(500).send('Error creating bid');
+  }
+});
+
 
 // Test endpoint
 router.get('/test', (req, res) => {

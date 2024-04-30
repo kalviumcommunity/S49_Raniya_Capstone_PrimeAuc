@@ -117,7 +117,7 @@ function AuctionItemsList() {
               <div className="button-container">
   <Link to={`/itemdetails/${item.lot_no}`}>
     <CButton color="secondary" className="auction-button">
-      BID FOR ITEM
+      BID FOR LOT
     </CButton>
   </Link>
 </div>
