@@ -6,6 +6,7 @@ const Joi = require('joi');
 const Auction = require('./models/AuctionItem.js');
 const { Lot, validateLot, validateBid } = require('./models/BidItem.js');
 
+
 // Route to get all bititems and it details
 router.get('/biditems',async(req,res)=>{
   try{
@@ -17,13 +18,21 @@ router.get('/biditems',async(req,res)=>{
   }
 })
 
+
 // Route to create a new bid for a lot
 router.post('/lots/:lot_no/bids', async (req, res) => {
   const { lot_no } = req.params;
   console.log('Received request to create bid for lot ID:', lot_no);
   console.log('Request body:', req.body);
+  const { error } = validateBid(req.body);
+  if (error) {
+    console.log(error);
+    return res.status(400).send(error.details[0].message);
+  }
+
   
   try {
+    
     let lot = await Lot.findOne({ lot_no: lot_no });
 
     // If the lot doesn't exist, create a new one
@@ -38,7 +47,7 @@ router.post('/lots/:lot_no/bids', async (req, res) => {
 
     // Add the bid to the lot
     lot.bids.push(req.body);
-    await lot.save();
+    await lot.save(); 
 
     console.log('Bid created successfully:', lot);
     res.status(201).send(lot);
