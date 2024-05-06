@@ -18,11 +18,20 @@ function Bid() {
   const { lotno } = useParams();
   const [item, setItem] = useState(null);
   const [bidAmount, setBidAmount] = useState("");
-  const [previousBid, setPreviousBid] = useState(0);
+  const [countdownEnded, setCountdownEnded] = useState(false); // State to track if countdown has ended
+
+  
   const [visible, setVisible] = useState(false);
   const [bidConfirmed, setBidConfirmed] = useState(false); // State to track bid confirmation
+  const [latestBid, setLatestBid] = useState(0);
+  const [allBids, setAllBids] = useState([]); // State to store all bids
+
 
   useEffect(() => {
+    
+
+    fetchLatestBid();
+ 
     fetchData();
   }, [lotno]);
 
@@ -35,6 +44,23 @@ function Bid() {
     }
   }, [bidConfirmed]);
 
+  async function fetchLatestBid() {
+    try {
+      const response = await axios.get('http://localhost:3000/biditems');
+      const lot = response.data.find(item => item.lot_no === lotno);
+      if (lot) {
+        const sortedBids = lot.bids.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        const latestBid = sortedBids[0];
+        setLatestBid(latestBid);
+        setAllBids(sortedBids); // Update allBids state with all bids
+
+      } else {
+        console.error(`Lot with lot number ${lotno} not found.`);
+      }
+    } catch (error) {
+      console.error('Error fetching bid information:', error);
+    }
+  }
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -51,15 +77,26 @@ function Bid() {
   };
 
   const handleQuickBid = () => {
-    const newBidAmount = previousBid + 500;
-    setBidAmount(newBidAmount.toString());
-    setPreviousBid(newBidAmount);
+    if (!latestBid) {
+      setBidAmount("500");
+    } else {
+      const newBidAmount = latestBid.amount + 500;
+      setBidAmount(newBidAmount.toString());
+    }
   };
+  
 
   const handlePlaceBid = async () => {
     const ipAddress = await getIPAddress();
     const userId = localStorage.getItem("userId");
     const timestamp = new Date().toISOString();
+
+    
+  // Check if bid amount meets the increment requirement
+  if (parseInt(bidAmount) < parseInt(latestBid.amount) + 500) {
+    alert("Bid should be at least 500 higher than the current bid.");
+    return; // Stop further execution
+  }
 
     // Construct bid object
     const bid = {
@@ -77,6 +114,8 @@ function Bid() {
       setBidConfirmed(true); // Set bid confirmation to true after successful bid placement
       console.log("Bid placed:", response.data);
       setVisible(false);
+      // Fetch latest bid data after successfully placing the bid
+      fetchLatestBid(); // Call the fetchLatestBid function again
     } catch (error) {
       console.error("Error placing bid:", error);
     }
@@ -100,9 +139,20 @@ function Bid() {
           Click here for auction terms and conditions
         </Link>
       </div>
-      <CountdownTimer lotno={lotno} />
+      
+      {latestBid ? (
+        <div className="latestbid">
+          <h1>CURRENT BID {latestBid.amount} BY {latestBid.userbid_no}</h1>
+        </div>
+      ) : (
+        <p className="latestbid">Latest bid will be shown here...</p>
+      )}
+    
+      <CountdownTimer lotno={lotno} onCountdownEnded={setCountdownEnded} />
+      
+    
       <div className="bid-container">
-        <div className="details">
+              <div className="details">
           {item && (
             <div>
               <img src={item.image} alt={item.title} />
@@ -122,16 +172,27 @@ function Bid() {
             value={bidAmount}
             onChange={handleBidChange}
             placeholder="Enter bid amount"
+            disabled={countdownEnded} 
           />
-          <button onClick={handleQuickBid}>Quick Bid</button>
+          <button onClick={handleQuickBid} disabled={countdownEnded}>Quick Bid</button>
 
           <CButton
             color="primary"
             onClick={() => setVisible(true)}
-            disabled={!bidAmount}
+            disabled={!bidAmount || countdownEnded}
           >
             PLACE BID
           </CButton>
+
+          <div className="chatbox-bids">
+  {allBids.map((bid, index) => (
+    <div className="bid" key={index}>
+      <h4 className="user">{bid.userbid_no}</h4>
+      <p className="amount">₹{bid.amount}</p>
+    </div>
+  ))}
+</div>
+
 
           <CModal
             backdrop="static"
