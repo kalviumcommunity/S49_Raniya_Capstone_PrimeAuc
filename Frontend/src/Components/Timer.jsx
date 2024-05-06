@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../Styles/Timer.css";
 
-const CountdownTimer = ({ lotno }) => {
+const CountdownTimer = ({ lotno,onCountdownEnded }) => {
   // State variables to hold start and end times
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
@@ -16,7 +16,10 @@ const CountdownTimer = ({ lotno }) => {
         const { start_time, end_time } = response.data;
         setStartTime(new Date(start_time));
         setEndTime(new Date(end_time));
-        console.log(start_time,end_time)
+        console.log(start_time,end_time);
+        if (new Date(end_time) < new Date()) {
+          onCountdownEnded(true); // Notify parent component when countdown ends
+        }
       })
       .catch(error => {
         console.error('Error fetching data:', error);
