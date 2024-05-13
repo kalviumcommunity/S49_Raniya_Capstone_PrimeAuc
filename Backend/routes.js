@@ -46,7 +46,6 @@ router.post('/lots/:lot_no/bids', async (req, res) => {
 
     // Add the bid to the lot
     const validatedBid = validateLot(req.body);
-    // lot.bids.push(validateLot(req.body));
     lot.bids.push(req.body);
     await lot.save(); 
 
