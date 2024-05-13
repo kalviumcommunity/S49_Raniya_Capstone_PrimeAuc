@@ -1,10 +1,9 @@
 
-.imagemain{
+.image{
   max-width: 100vw;
-
 }  
 
-.imagemain {
+.image {
   width: 100%;
   height: 740px; 
   background-size: cover;
@@ -20,3 +19,7 @@
   color: white;
   text-align: center;
   font-size: 36px; }
+
+  .imagecarousel{
+    display: flex;
+  }
