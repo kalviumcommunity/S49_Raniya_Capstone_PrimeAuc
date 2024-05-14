@@ -25,23 +25,6 @@ export default App;
 {/* <div className="d-flex justify-content-center">
   <CSpinner />
 </div> */}
-
-
-
-// <div className="container">
-//         <CCarousel controls transition="crossfade">
-//           <CCarouselItem>
-//             <CImage className="d-block w-100" src={background} alt="slide 1" />
-//           </CCarouselItem>
-//           <CCarouselItem>
-//             <CImage className="d-block w-100" src={b1} alt="slide 2" />
-//           </CCarouselItem>
-//           <CCarouselItem>
-//             <CImage className="d-block w-100" src={b2} alt="slide 3" />
-//           </CCarouselItem>
-//         </CCarousel>
-//       </div>
-
 //       <CCallout color="primary">
 //         New to or unfamiliar with flexbox? Read this CSS Tricks flexbox guide for background,
 //         terminology, guidelines, and code snippets.
