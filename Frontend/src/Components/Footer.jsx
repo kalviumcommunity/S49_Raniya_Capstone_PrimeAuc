@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 const Footer = () => {
     const location = useLocation(); // Use the useLocation hook
 
-    const handlePathChange = () => {
+    const getBackgroundColorBasedOnRoute = () => {
         const path = location.pathname; // Use location.pathname instead of window.location.pathname
         if (path === '/sell' || path === '/help') {
             return "rgb(88, 11, 11)"; // Red background for '/sell' and '/help'
@@ -17,7 +17,7 @@ const Footer = () => {
     };
 
     return (
-        <div style={{ backgroundColor: handlePathChange() }} className="Footer">
+        <div style={{ backgroundColor: getBackgroundColorBasedOnRoute() }} className="Footer">
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 col-lg-5 col-12 ft-1">
