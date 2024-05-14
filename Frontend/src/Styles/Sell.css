@@ -1,20 +1,106 @@
 .grid-container {
-    display: grid;
-    grid-template-columns: 40% 60%;
-    grid-gap: 20px;
-    margin-top:20%;
-  }
-  
-  .grid-item {
+  text-align: center;
+  font-family: "Garamond", serif;
+  font-weight:800;
+  line-height: 1.6;
+  word-spacing: 4px;
+  font-size: 1.8rem;
+  padding: 80px;
+}
+
+.grid-container h3 {
+  margin: 20px;
+}
+
+.grid-container a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  padding: 10px 40px;
+  border: 1.5px solid darkred;
+  border-radius: 5px;
+  background-color: darkred;
+  margin:20px;
+}
+
+.grid-container a:hover {
+  background-color: antiquewhite;
+  color: darkred;
+}
+
+
+  .step-box {
     padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
   }
   
-  .left-content {
-    
-    grid-column: 1 / 2;
+  .gold-bg {
+    background-color: rgba(184, 135, 11, 0.913);
   }
   
-  .right-content {
-    grid-column: 2 / 3;
+  .grey-bg {
+    background-color:rgba(139, 0, 0, 0.858);
   }
   
+  .step-box h2 {
+    color: red; /* Highlighted color */
+  }
+  
+.container{
+  margin-bottom:100px;
+}
+
+span{
+  color: blanchedalmond;
+}
+.col-md-6 h2 {
+  font-size: 2em;
+  color: transparent; /* Set text color to transparent */
+  padding: 20px;
+  font-weight: 500;
+  text-shadow: 
+    -1px -1px 0 blanchedalmond,  
+    1px -1px 0 blanchedalmond,
+    -1px 1px 0 blanchedalmond,
+    1px 1px 0 blanchedalmond,
+    0px 0px 5px rgba(255, 182, 193, 0.5); /* Adjust the color and size for the glow effect */
+  background: linear-gradient(to right, #0000 0%, #0000 49%, blanchedalmond 50%, blanchedalmond 100%);
+  -webkit-background-clip: text; /* For Safari */
+  background-clip: text;
+}
+.header1{
+  font-size: 2.5em;
+  color: transparent; /* Set text color to transparent */
+  font-weight: 400;
+  text-shadow: 
+    -1px -1px 0 blanchedalmond,  
+    1px -1px 0 blanchedalmond,
+    -1px 1px 0 blanchedalmond,
+    1px 1px 0 blanchedalmond,
+    0px 0px 5px rgba(255, 182, 193, 0.5); /* Adjust the color and size for the glow effect */
+  background: linear-gradient(to right, #0000 0%, #0000 49%, blanchedalmond 50%, blanchedalmond 100%);
+  -webkit-background-clip: text; /* For Safari */
+  background-clip: text;
+
+}
+
+.col-md-6 button{
+ margin: 20px;
+  padding: 10px;
+  
+}
+.col-md-6 button:hover{
+ 
+  background-color: blanchedalmond;
+}
+.col-md-6 p{
+  margin: 10px;
+   padding: 10px;
+   font-size: 1.2rem;
+ }
+
+
+ .container2{
+  margin: 50px;
+ }
