@@ -39,13 +39,13 @@ function Sell() {
       <div className="container">
         <CCarousel controls transition="crossfade">
           <CCarouselItem>
-            <CImage className="d-block w-100" src={art} alt="slide 1" />
+            <CImage className="d-block w-100" src={acc} alt="slide 1" />
           </CCarouselItem>
           <CCarouselItem>
-            <CImage className="d-block w-100" src={acc} alt="slide 2" />
+            <CImage className="d-block w-100" src={ant} alt="slide 2" />
           </CCarouselItem>
           <CCarouselItem>
-            <CImage className="d-block w-100" src={ant} alt="slide 3" />
+            <CImage className="d-block w-100" src={art} alt="slide 3" />
           </CCarouselItem>
           <CCarouselItem>
             <CImage className="d-block w-100" src={oth} alt="slide 4" />
@@ -53,6 +53,7 @@ function Sell() {
         </CCarousel>
       </div>
 <div className="container2">
+  <h1  className="header2">SELLING GUIDE : HOW TO LIST AN ITEM AT LOXERA</h1>
       <div class="row align-items-md-stretch">
         <div class="col-md-6">
           <div class="step-box grey-bg">
