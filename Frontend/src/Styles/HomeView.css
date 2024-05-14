@@ -21,5 +21,45 @@
   font-size: 36px; }
 
   .imagecarousel{
+ padding: 70px;
     display: flex;
+    justify-content: space-evenly;
   }
+/* Adjust image size for smaller screens */
+@media (max-width: 768px) {
+
+  .imagecarousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .imagebox-container {
+    margin-bottom: 30px; /* Add space between image carousels */
+  }
+  
+}
+
+.art,.ant,.oth,.acc{
+  padding-right: 90px;
+  padding-left: 90px;
+  padding-bottom:60px;
+ 
+}
+
+.art img,
+.acc img,
+.ant img,
+.oth img {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow effect */
+  transition: box-shadow 0.3s; /* Smooth transition on hover */
+  border-radius: 10px;
+}
+
+.art img:hover,
+.acc img:hover,
+.ant img:hover,
+.oth img:hover {
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5); /* Increase shadow on hover */
+}
