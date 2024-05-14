@@ -9,7 +9,7 @@ const Footer = () => {
 
     const getBackgroundColorBasedOnRoute = () => {
         const path = location.pathname; // Use location.pathname instead of window.location.pathname
-        if (path === '/sell' || path === '/help') {
+        if (path.startsWith('/sell') || path === '/help') {
             return "rgb(88, 11, 11)"; // Red background for '/sell' and '/help'
         } else {
             return "#0e1b32"; // Default background color
