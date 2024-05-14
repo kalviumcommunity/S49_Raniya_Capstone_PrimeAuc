@@ -10,6 +10,7 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { CImage } from '@coreui/react';
+import {Link} from "react-router-dom";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -17,6 +18,7 @@ function Imagebox({ images, heading }) {
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
     const maxSteps = images.length;
+    
 
     const handleNext = () => {
         setActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -30,11 +32,17 @@ function Imagebox({ images, heading }) {
         setActiveStep(step);
     };
 
+  const handleImageClick = (image) => () => {
+      // Check if the click is from auto-sliding
+      if (activeStep === images.indexOf(image)) {
+        console.log("This is an image of " + image.lot_no);
+      }
+  };
     return (
-        <div style={{ display: "flex", justifyContent: "space-between", padding: "20px" }}>
+        <div>
             <Box sx={{ maxWidth: 400, flexGrow: 1, marginRight: "20px" }}>
                 <Paper square elevation={0}>
-                    <Typography>{heading}</Typography>
+                    <Typography style={{fontFamily:"poppins", fontWeight:"300",fontSize:"2rem",textAlign:"center",justifyContent:"center" }}>{heading}</Typography>
                 </Paper>
                 <AutoPlaySwipeableViews
                     axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -44,7 +52,9 @@ function Imagebox({ images, heading }) {
                 >
                     {images.map((image, index) => (
                         <div key={index} style={{ width: '100%' }}>
-                            <CImage src={image.imgPath} alt={image.title} style={{ width: '100%', height: '500px' }} fluid />
+                            <Link to={`/itemdetails/${image.lot_no}`}>                             
+                             <CImage onClick={handleImageClick(image)} src={image.imgPath} alt={image.lot_no} style={{ width: '100%', height: '500px' }} fluid />
+                             </Link>
                         </div>
                     ))}
                 </AutoPlaySwipeableViews>
@@ -79,3 +89,6 @@ function Imagebox({ images, heading }) {
 }
 
 export default Imagebox;
+
+
+//history.push method, you're programmatically navigating to the specified route upon clicking the image
