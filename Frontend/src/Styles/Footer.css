@@ -109,10 +109,10 @@
    border: 1px solid #ffffff98; /* white border */
       /* adjust padding as needed */
     text-align: center; /* center align text */
-    background-color: #01193c88; /* optional: white background */
+    /* background-color: #01193c88; */
 }
 .Footer{
-  background:#0e1b32;
+  /* background:#0e1b32; */
   color:rgb(139, 136, 136);
   margin-bottom: 0;
   padding-bottom: 0;
@@ -121,4 +121,13 @@
   margin-top: 20px;
   margin-bottom: 0;
   padding-bottom: 0;
+}
+.Footer {
+  /* Default background styles */
+  background-color: #0e1b32; /* Default background color */
+}
+
+.red {
+  background-color: rgb(88, 11, 11); /* Red background color */
+  /* Add any other styles you want to apply when the path is '/sell' or '/help' */
 }
