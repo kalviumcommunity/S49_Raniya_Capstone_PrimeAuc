@@ -127,3 +127,13 @@ span{
     font-size: 1.2rem;
   }
  }
+ .lottiecontainer {
+  max-width: 200px;
+  max-height: 200px;
+  /* Center horizontally */
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}

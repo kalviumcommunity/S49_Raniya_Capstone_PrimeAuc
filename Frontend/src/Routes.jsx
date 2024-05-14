@@ -20,7 +20,7 @@ function Routing() {
           <Route path="/help" element={<Help/>} />
           <Route path="/auctionitemlist" element={<AuctionItemsList/>} />
           <Route path="/itemdetails/:lotno" element={<ItemDetails/>} />
-          <Route path="/listitem" element={<Listitem/>} />
+          <Route path="/sell/listitem" element={<Listitem/>} />
           <Route path="/bid/:lotno" element={<Bid/>} />
 
         </Routes>

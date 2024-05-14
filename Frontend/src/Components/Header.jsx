@@ -20,7 +20,7 @@ export default function App() {
   };
 
   const getBackgroundImage = () => {
-    if (location.pathname === '/sell' || location.pathname === '/help') {
+    if (location.pathname.startsWith('/sell') || location.pathname === '/help') {
       return sellBackgroundImage;
     }
     return backgroundImage; // Default background image
