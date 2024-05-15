@@ -1,32 +1,47 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { CImage, CCarousel, CCarouselItem } from "@coreui/react";
+import lottie from "lottie-web";
 import sellbackground from "../assets/images/sellbackground.jpg";
 import art from "../assets/images/art.png";
 import acc from "../assets/images/acc.png";
 import oth from "../assets/images/oth.png";
 import ant from "../assets/images/ant.png";
-import { Link } from "react-router-dom";
-import { CImage, CCarousel, CCarouselItem } from "@coreui/react";
+import s1 from "../assets/s1.json";
+import s2 from "../assets/s2.json";
+import s3 from "../assets/s3.json";
+import s4 from "../assets/s4.json";
+import s5 from "../assets/s5.json";
+import s6 from "../assets/s6.json";
 import "../Styles/Sell.css";
-import lottie from "lottie-web";
-import { useEffect,useRef } from "react";
-import sellottie from "../assets/sell.json"
 
 function Sell() {
+  const lottieContainers = useRef([]);
 
-  const lottiecontainer=useRef(null);
   useEffect(() => {
-    lottie.loadAnimation({
-      container: lottiecontainer.current,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      animationData: sellottie // Directly pass the imported JSON file
+    const animations = [
+      s1, s2, s3, s4, s5, s6
+    ];
+
+    const animationInstances = animations.map((animationData, index) => {
+      return lottie.loadAnimation({
+        container: lottieContainers.current[index],
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        animationData: animationData
+      });
     });
+
+    // Cleanup function
+    return () => {
+      // Clean up animation instances
+      animationInstances.forEach(instance => instance.destroy());
+    };
   }, []);
-  
+
   return (
     <div>
-     
       <div
         className="image"
         style={{ backgroundImage: `url(${sellbackground})` }}
@@ -51,7 +66,6 @@ function Sell() {
           <Link to="/sell/Listitem">List Item At LOXERA</Link>
         </div>
       </div>
-      
       <div className="container">
         <CCarousel controls transition="crossfade">
           <CCarouselItem>
@@ -70,7 +84,7 @@ function Sell() {
       </div>
 <div className="container2">
   <h1  className="header2">SELLING GUIDE : <br />HOW TO LIST AN ITEM AT LOXERA</h1>
-  <div className="lottiecontainer" ref={lottiecontainer}></div>
+  
       <div class="row align-items-md-stretch">
         <div class="col-md-6">
           <div class="step-box grey-bg">
@@ -81,23 +95,16 @@ function Sell() {
                 {" "}
                 Art, Antiques and Collectibles, Others, or Accessories.
               </span>{" "}
+              <div className="lottiecontainer" ref={(el) => lottieContainers.current[4] = el}></div>
             </p>
-            <Link to="/sell/Listitem">
-              <button class="btn btn-outline-light" type="button">
-                Choose Category
-              </button>
-            </Link>
+           
           </div>
         </div>
         <div class="col-md-6">
           <div class="step-box gold-bg">
             <h2>UPLOAD DETAILS</h2>
-            <p>Provide detailed information about the item you're listing.</p>
-            <Link to="/sell/Listitem">
-              <button class="btn btn-outline-light" type="button">
-                Upload Details
-              </button>
-            </Link>
+            <p>Provide detailed information about the item you're listing.</p> <div className="lottiecontainer" ref={(el) => lottieContainers.current[0] = el}></div>
+            
           </div>
         </div>
       </div>
@@ -106,17 +113,14 @@ function Sell() {
           <div class="step-box gold-bg">
             <h2>SET TIME</h2>
             <p>
-              Set the starting and ending time for the auction.{" "}
+              Set the time for the auction.{" "}
               <span>
                 {" "}
                 End time should be at least 24 hours after the start time
               </span>{" "}
             </p>
-            <Link to="/sell/Listitem">
-              <button class="btn btn-outline-light" type="button">
-                Set Time
-              </button>
-            </Link>
+            <div className="lottiecontainer" ref={(el) => lottieContainers.current[2] = el}></div>
+            
           </div>
         </div>
         <div class="col-md-6">
@@ -126,11 +130,8 @@ function Sell() {
               Input the minimum price you're willing to accept for the item
               <span> Starting price should be 25% of the reserve price.</span>
             </p>
-            <Link to="/sell/Listitem">
-              <button class="btn btn-outline-light" type="button">
-                Set Reserve Price
-              </button>
-            </Link>
+            <div className="lottiecontainer" ref={(el) => lottieContainers.current[1] = el}></div>
+          
           </div>
         </div>
       </div>
@@ -140,23 +141,16 @@ function Sell() {
           <div class="step-box grey-bg">
             <h2>UPLOAD IMAGE</h2>
             <p>Upload a clear image of the item you're listing.</p>
-            <Link to="/sell/Listitem">
-              {" "}
-              <button class="btn btn-outline-light" type="button">
-                Upload Image
-              </button>
-            </Link>
+            <div className="lottiecontainer" ref={(el) => lottieContainers.current[5] = el}></div>
+          
           </div>
         </div>
         <div class="col-md-6">
           <div class="step-box gold-bg">
             <h2>REVIEW AND SUBMIT</h2>
             <p>Double-check all details and submit your listing for auction.</p>
-            <Link to="/sell/Listitem">
-              <button class="btn btn-outline-light" type="button">
-                Review and Submit
-              </button>
-            </Link>
+            <div className="lottiecontainer" ref={(el) => lottieContainers.current[3] = el}></div>
+            
           </div>
         </div>
       </div>
