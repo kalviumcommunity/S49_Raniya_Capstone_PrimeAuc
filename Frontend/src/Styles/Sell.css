@@ -29,12 +29,7 @@
 }
 
 
-  .step-box {
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-  }
-  
+
   .gold-bg {
     background-color: rgba(133, 101, 20, 0.829);
   }
@@ -111,6 +106,7 @@ span{
   margin: 10px;
    padding: 10px;
    font-size: 1.2rem;
+   flex: 1;
  }
 
 
@@ -127,13 +123,22 @@ span{
     font-size: 1.2rem;
   }
  }
+
+
  .lottiecontainer {
-  max-width: 200px;
-  max-height: 200px;
-  /* Center horizontally */
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 999;
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.step-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%; /* Ensure the box takes full height of the parent */
+
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+ 
+  
 }
