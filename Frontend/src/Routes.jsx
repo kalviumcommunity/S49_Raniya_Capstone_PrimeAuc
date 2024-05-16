@@ -8,6 +8,7 @@ import AuctionItemsList from "./Components/AuctionItemsList";
 import ItemDetails from "./Components/ItemDetails";
 import Listitem from "./Components/Listitem";
 import Bid from "./Components/Bid";
+import Aboutus from './Components/Aboutus';
 
 function Routing() {
   return (
@@ -17,6 +18,7 @@ function Routing() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Login/>} />
           <Route path="/sell" element={<Sell/>} />
+          <Route path="/aboutus" element={<Aboutus/>} />
           <Route path="/help" element={<Help/>} />
           <Route path="/auctionitemlist" element={<AuctionItemsList/>} />
           <Route path="/itemdetails/:lotno" element={<ItemDetails/>} />

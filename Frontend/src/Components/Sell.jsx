@@ -43,7 +43,7 @@ function Sell() {
   return (
     <div>
       <div
-        className="image"
+        className="imagemain"
         style={{ backgroundImage: `url(${sellbackground})` }}
       >
         <h1 className="header1">
@@ -102,7 +102,7 @@ function Sell() {
         </div>
         <div class="col-md-6">
           <div class="step-box gold-bg">
-            <h2>UPLOAD DETAILS</h2>
+            <h2>PROVIDE DETAILS</h2>
             <p>Provide detailed information about the item you're listing.</p> <div className="lottiecontainer" ref={(el) => lottieContainers.current[0] = el}></div>
             
           </div>

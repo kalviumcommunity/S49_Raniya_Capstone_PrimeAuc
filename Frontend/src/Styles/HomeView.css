@@ -1,11 +1,10 @@
-
-.image{
+.imagemain {
   max-width: 100vw;
-}  
+}
 
-.image {
+.imagemain {
   width: 100%;
-  height: 740px; 
+  height: 740px;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -18,35 +17,45 @@
   transform: translate(-50%, -50%);
   color: white;
   text-align: center;
-  font-size: 36px; }
+  font-size: 36px;
+}
 
-  .imagecarousel{
- padding: 70px;
-    display: flex;
-    justify-content: space-evenly;
-  }
-/* Adjust image size for smaller screens */
+.imagecarousel {
+  padding: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  /* flex-direction: column;
+  width: 100vw;
+*/}
+
+/* .imagebox-container {
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding and border are included in the width */
+  /* margin-bottom: 80px;
+  margin-left: 20px; */
+
 @media (max-width: 768px) {
-
   .imagecarousel {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
   }
-  
+
   .imagebox-container {
     margin-bottom: 30px; /* Add space between image carousels */
   }
-  
 }
-
-.art,.ant,.oth,.acc{
+.art {
+  margin-top: 150px;
+}
+.art,
+.ant,
+.oth,
+.acc {
   padding-right: 90px;
   padding-left: 180px;
-  padding-bottom:60px;
-  
- 
+  padding-bottom: 60px;
 }
 
 .art img,
@@ -64,5 +73,7 @@
 .acc img:hover,
 .ant img:hover,
 .oth img:hover {
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8); /* Increase shadow on hover */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
 }
+
+
