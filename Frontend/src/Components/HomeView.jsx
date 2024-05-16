@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Imagebox from "./Imagebox";
 import background from "../assets/images/background.jpg";
 import "../Styles/HomeView.css";
@@ -6,12 +6,20 @@ import art from "../assets/images/art.png";
 import ant from "../assets/images/ant.png";
 import oth from "../assets/images/oth.png";
 import acc from "../assets/images/acc.png";
+import { CImage } from "@coreui/react";
+import s1 from "../assets/images/1.jpg";
+import s2 from "../assets/images/2.png";
+import s3 from "../assets/images/3.jpg";
+import s4 from "../assets/images/4.jpg";
+import { Link } from "react-router-dom";
+
 function HomeView() {
   // State variables to hold images for different statuses
   const [activeImages, setActiveImages] = useState([]);
   const [closedImages, setClosedImages] = useState([]);
   const [upcomingImages, setUpcomingImages] = useState([]);
 
+  
   useEffect(() => {
     fetch("http://localhost:3000/items")
       .then((response) => response.json())
@@ -58,43 +66,40 @@ function HomeView() {
 
   return (
     <div>
-      <div className="image" style={{ backgroundImage: `url(${background})` }}>
+      <div
+        className="imagemain"
+        style={{ backgroundImage: `url(${background})` }}
+      >
         <h1 className="header1">WHERE BEAUTY MEETS THE EYES OF THE BEHOLDER</h1>
       </div>
 
       <div className="imagecarousel">
-  <div className="imagebox-container">
-    <Imagebox images={activeImages} heading={x} />
-  </div>
+        <div className="imagebox-container">
+          <Imagebox images={activeImages} heading={x} />
+        </div>
 
-  <div className="imagebox-container">
-    <Imagebox images={closedImages} heading={y} />
-  </div>
+        <div className="imagebox-container">
+          <Imagebox images={closedImages} heading={y} />
+        </div>
 
-  <div className="imagebox-container">
-    <Imagebox images={upcomingImages} heading={z} />
-  </div>
-</div>
+        <div className="imagebox-container">
+          <Imagebox images={upcomingImages} heading={z} />
+        </div>
+      </div>
+{/* ///// */}
 
-
-<div className="art">
-  <img src={art} alt="f" />
-  
-</div>
-<div className="acc">
- 
-  <img src={acc} alt="" />
-</div>
-<div className="ant">
- 
-  <img src={ant} alt="" />
-</div>
-<div className="oth">
- 
-  <img src={oth} alt="" />
-</div>
-
-
+      <div className="art">
+        <img src={art} alt="f" />
+      </div>
+      <div className="acc">
+        <img src={acc} alt="" />
+      </div>
+      <div className="ant">
+        <img src={ant} alt="" />
+      </div>
+      <div className="oth">
+        <img src={oth} alt="" />
+      </div>
     </div>
   );
 }
