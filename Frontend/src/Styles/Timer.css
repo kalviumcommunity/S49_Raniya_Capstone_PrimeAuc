@@ -3,8 +3,8 @@
   padding: 10px;
   border: 2px solid #ccc;
   border-radius: 5px;
-  width: 350px; /* Increased width for larger boxes */
   margin: 0 auto;
+  min-width: 300px;
 }
 
 
