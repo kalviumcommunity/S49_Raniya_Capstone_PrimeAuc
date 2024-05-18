@@ -86,7 +86,25 @@ function HomeView() {
           <Imagebox images={upcomingImages} heading={z} />
         </div>
       </div>
-{/* ///// */}
+
+      <div class="clearfix">
+        <div class="topheader">
+          <h1 class="V1">LOXERA AUCTIONS</h1>
+          <Link to="/auctionitemlist">
+            <h1 class="V2">VIEW ALL</h1>
+          </Link>
+        </div>
+        <div class="clearfix-container">
+          <CImage fluid rounded src={s1} width={300} height={300} />
+
+          <CImage fluid rounded src={s2} width={300} height={200} />
+
+          <CImage fluid rounded src={s3} width={300} height={300} />
+
+          <CImage fluid rounded src={s4} width={300} height={300} />
+        </div>
+      </div>
+
 
       <div className="art">
         <img src={art} alt="f" />
