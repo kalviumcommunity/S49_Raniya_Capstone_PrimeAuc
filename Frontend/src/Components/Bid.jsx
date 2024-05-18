@@ -60,7 +60,7 @@ function Bid() {
     }
   }
 
-  console.log(allBids,"erdftghju")
+  // console.log(allBids,"allbids")
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -191,9 +191,9 @@ function Bid() {
             ))}
           </div>
           <div>
-            <h1>graph</h1>
-            
-            <Chart bids={allBids} /> {/* Ensure Chart component is used */}
+          
+            <h1>GRAPH</h1>
+            <Chart bids={allBids} /> 
           
           </div>
 
