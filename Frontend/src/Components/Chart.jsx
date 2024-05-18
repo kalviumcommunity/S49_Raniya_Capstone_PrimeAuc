@@ -14,12 +14,13 @@ function Chart({ bids }) {
       {
         label: "Bids Over Time",
         data: [],
-        backgroundColor: 'yellow',
-        borderColor: 'green',
+        backgroundColor: 'rgba(0, 8, 20, 0.2)', // Blue with transparency
+        borderColor: '#0e1b32', // Solid blue
+        borderWidth: 1,
         tension: 0.4,
         fill: true,
         pointStyle: 'rect',
-        pointBorderColor: 'blue',
+        pointBorderColor: '#d0a644', // Gold for point borders
         pointBackgroundColor: '#fff',
         showLine: true
       }

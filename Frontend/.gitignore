@@ -8,6 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+package.json
+package-lock.json
 
 Frontend/src/Components/Login.jsx
 Frontend/src/Styles/Login.css
