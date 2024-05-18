@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import lottie from "lottie-web";
 import axios from "axios";
 import {
   CCard,
@@ -14,6 +15,7 @@ import "../Styles/Item.css";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { Link } from "react-router-dom";
+import live from "../assets/live.json";
 
 function AuctionItemsList() {
   const [items, setItems] = useState([]);
@@ -22,15 +24,17 @@ function AuctionItemsList() {
   const [page, setPage] = useState(1);
   const itemsPerPage = 6;
 
+  const lottieContainers = useRef([]);
+  const animationInstances = useRef([]);
+
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      await axios.get("http://localhost:3000/items").then((res) => {
-        setItems(res.data);
-      });
+      const res = await axios.get("http://localhost:3000/items");
+      setItems(res.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -41,28 +45,21 @@ function AuctionItemsList() {
   }, [items, page]);
 
   const handleFilter = (category) => {
-    console.log("calling onload 1st", category, items);
     let array = [];
     if (category === "All") {
-      let x = items.map((item) => {
-        return item.items;
-      });
+      let x = items.map((item) => item.items);
 
-      x.map((item) => {
-        item.map((elem) => {
+      x.forEach((item) => {
+        item.forEach((elem) => {
           array.push(elem);
         });
       });
-      console.log(array, "onload");
-      setFilteredItems(array);
+
       const startIndex = (page - 1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
       setFilteredItems(array.slice(startIndex, endIndex));
     } else {
-      console.log("xyz", category, items);
-
       const filtered = items.find((item) => item.category === category);
-      // console.log(filtered.items);
       if (filtered) {
         setFilteredItems(filtered.items);
       } else {
@@ -76,6 +73,30 @@ function AuctionItemsList() {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+  useEffect(() => {
+    // Clear previous animation instances
+    animationInstances.current.forEach((instance) => instance.destroy());
+    animationInstances.current = [];
+
+    lottieContainers.current.forEach((container, index) => {
+      if (container && container.dataset.active === "true") {
+        const instance = lottie.loadAnimation({
+          container: container,
+          renderer: "svg",
+          loop: true,
+          autoplay: true,
+          animationData: live,
+        });
+        animationInstances.current[index] = instance;
+      }
+    });
+
+    // Cleanup function to destroy animation instances when component unmounts
+    return () => {
+      animationInstances.current.forEach((instance) => instance.destroy());
+    };
+  }, [filteredItems]);
+
 
   return (
     <div>
@@ -95,33 +116,42 @@ function AuctionItemsList() {
       </div>
 
       <div className="card-container">
-        {filteredItems.map((item) => (
-          console.log(item),
-          <CCard className="custom-card">
-            <Link to={`/itemdetails/${item.lot_no}`} className="overlay-link"> 
-            <CCardImage
-              src={item.image}
-              alt={item.title}
-              className="custom-card-image"
-            />
-
-            <CCardImageOverlay className="overlay">
-              <CCardTitle className="overlay-text">VIEW DETAILS</CCardTitle>
-            </CCardImageOverlay>
+        {filteredItems.map((item, index) => (
+          <CCard className="custom-card" key={item.lot_no}>
+            <Link to={`/itemdetails/${item.lot_no}`} className="overlay-link">
+              <CCardImage
+                src={item.image}
+                alt={item.title}
+                className="custom-card-image"
+              />
+              <CCardImageOverlay className="overlay">
+                <CCardTitle className="overlay-text">VIEW DETAILS</CCardTitle>
+                {item.status === "Active" && (
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <div
+                      className="lottieContainer"
+                      style={{ width: "10%", height: "10%", zIndex: 999 }}
+                      ref={(el) => (lottieContainers.current[index] = el)}
+                      data-active="true"
+                    ></div>
+                    <div>
+                      <h1 className="live">LIVE</h1>
+                    </div>
+                  </div>
+                )}
+              </CCardImageOverlay>
             </Link>
-
             <CCardBody>
               <CCardTitle className="card-title" text-align="center">
                 {item.title}
               </CCardTitle>
               <div className="button-container">
-  <Link to={`/itemdetails/${item.lot_no}`}>
-    <CButton color="secondary" className="auction-button">
-      BID FOR LOT
-    </CButton>
-  </Link>
-</div>
-
+                <Link to={`/itemdetails/${item.lot_no}`}>
+                  <CButton color="secondary" className="auction-button">
+                    BID FOR LOT
+                  </CButton>
+                </Link>
+              </div>
             </CCardBody>
           </CCard>
         ))}

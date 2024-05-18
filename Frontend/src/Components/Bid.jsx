@@ -9,16 +9,17 @@ import {
   CModalHeader,
   CModalBody,
   CModalTitle,
-  CCollapse,
-  CCard,
-  CCardBody,
-
+  COffcanvas,
+  COffcanvasHeader,
+  COffcanvasBody,
+  COffcanvasTitle,
+  CCloseButton,
 } from "@coreui/react";
 import "../Styles/Bid.css";
 
 import ToastComponent from "./Toast";
 import Chart from "./Chart";
-
+import ImageCover from "./Image";
 function Bid() {
   const { lotno } = useParams();
   const [item, setItem] = useState(null);
@@ -30,7 +31,7 @@ function Bid() {
   const [latestBid, setLatestBid] = useState(0);
   const [allBids, setAllBids] = useState([]); // State to store all bids
 
-  const [visibleA, setVisibleA] = useState(false)
+  const [visibleA, setVisibleA] = useState(false);
 
   useEffect(() => {
     fetchLatestBid();
@@ -138,11 +139,15 @@ function Bid() {
 
   return (
     <div>
+
+
       <div className="terms">
         <Link to="/auction-terms" className="link11">
           Click here for auction terms and conditions
         </Link>
       </div>
+
+      <div className="parent-container">
       {latestBid ? (
         <div className="latestbid">
           <h1>
@@ -152,20 +157,20 @@ function Bid() {
       ) : (
         <p className="latestbid">UPCOMING AUCTION</p>
       )}
-      <CountdownTimer lotno={lotno} onCountdownEnded={setCountdownEnded} />
       <div className="bid-container">
+        <CountdownTimer lotno={lotno} onCountdownEnded={setCountdownEnded} />
         <div className="details">
           {item && (
             <div>
-              <img src={item.image} alt={item.title} />
-              <h2>TITLE: {item.title}</h2>
-              <p>LOT NO: {item.lot_no}</p>
-              <p>RESERVE PRICE: ***** </p>
-              <p>START TIME: {item.end_time}</p>
-              <p>END TIME: {item.start_time}</p>
+              <ImageCover item={item} />
             </div>
           )}
         </div>
+      </div>
+   
+
+
+
 
         <div className="bid-form">
           <h3>Bid Form</h3>
@@ -197,23 +202,27 @@ function Bid() {
             ))}
           </div>
 
-
-
-          <CButton color="primary" onClick={() => setVisibleA(!visibleA)}>
-      Graph
-    </CButton>
-   
-    
-        <CCollapse visible={visibleA}>
-          <CCard className="mt-3">
-            <CCardBody>
-              <Chart bids={allBids}/>
-            </CCardBody>
-          </CCard>
-        </CCollapse>
-       
-
-
+          <CButton color="primary" onClick={() => setVisibleA(true)}>
+            GRAPH
+          </CButton>
+          <COffcanvas
+            placement="bottom"
+            scroll={true}
+            visible={visibleA}
+            onHide={() => setVisibleA(false)}
+          >
+            <COffcanvasHeader>
+              <COffcanvasTitle>BID HISTORY LINE GRAPH DETAILS</COffcanvasTitle>
+              <CCloseButton
+                placement="end"
+                className="text-reset"
+                onClick={() => setVisibleA(false)}
+              />
+            </COffcanvasHeader>
+            <COffcanvasBody>
+              <Chart bids={allBids} />
+            </COffcanvasBody>
+          </COffcanvas>
 
           <CModal
             backdrop="static"
