@@ -46,9 +46,12 @@ function Chart({ bids }) {
   }, [bids]);
 
   return (
-    <div className="Chart" style={{ width: '800px', height: '800px' }}>
+  
+    <div className="Chart" style={{ width: '800px', height: '400px' }}>
       <Line data={data} />
     </div>
+
+   
   );
 }
 

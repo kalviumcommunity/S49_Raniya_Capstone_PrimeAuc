@@ -9,6 +9,10 @@ import {
   CModalHeader,
   CModalBody,
   CModalTitle,
+  CCollapse,
+  CCard,
+  CCardBody,
+
 } from "@coreui/react";
 import "../Styles/Bid.css";
 
@@ -25,6 +29,8 @@ function Bid() {
   const [bidConfirmed, setBidConfirmed] = useState(false); // State to track bid confirmation
   const [latestBid, setLatestBid] = useState(0);
   const [allBids, setAllBids] = useState([]); // State to store all bids
+
+  const [visibleA, setVisibleA] = useState(false)
 
   useEffect(() => {
     fetchLatestBid();
@@ -144,7 +150,7 @@ function Bid() {
           </h1>
         </div>
       ) : (
-        <p className="latestbid">Latest bid will be shown here...</p>
+        <p className="latestbid">UPCOMING AUCTION</p>
       )}
       <CountdownTimer lotno={lotno} onCountdownEnded={setCountdownEnded} />
       <div className="bid-container">
@@ -190,12 +196,24 @@ function Bid() {
               </div>
             ))}
           </div>
-          <div>
-          
-            <h1>GRAPH</h1>
-            <Chart bids={allBids} /> 
-          
-          </div>
+
+
+
+          <CButton color="primary" onClick={() => setVisibleA(!visibleA)}>
+      Graph
+    </CButton>
+   
+    
+        <CCollapse visible={visibleA}>
+          <CCard className="mt-3">
+            <CCardBody>
+              <Chart bids={allBids}/>
+            </CCardBody>
+          </CCard>
+        </CCollapse>
+       
+
+
 
           <CModal
             backdrop="static"
