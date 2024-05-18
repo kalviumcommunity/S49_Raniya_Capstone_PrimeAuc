@@ -109,10 +109,7 @@
 .topheader h1.V1 {
   margin: 0;
   margin-left: 80px;
-  font-size: 2em;
-
-  
-  
+  font-size: 2em;  
   background-image: linear-gradient(rgb(20, 39, 117), rgb(186, 161, 32));
     -webkit-background-clip: text;
     background-clip: text;
