@@ -27,15 +27,23 @@ function ItemDetails() {
   }
 
   return (
-    <div>
+    <div styles={{display:"flex"}} >
+    <div >
   <h1>Item Details</h1>
   <h2>{item.title}</h2>
-  <img src={item.image} alt={item.title} />
+
+    <img src={item.image} alt={item.title}  style={{width:"300px",height:"300px"}}/>
+ 
+ 
   <p>{item.description}</p>
   <Link to={`/bid/${item.lot_no}`} >
     <CButton color="secondary">BID FOR LOT</CButton>
   </Link>
+
 </div>
+
+
+    </div>
 
   );
 }
