@@ -97,3 +97,123 @@
 .details {
   margin-top: 2em; /* Adds some space between the timer and the image */
 }
+
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.custom-modal {
+  background: #fff;
+  width: 80%;
+  max-width: 800px;
+  border-radius: 8px;
+  overflow: hidden;
+  align-items: center;
+
+}
+
+.custom-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: #f4f4f4;
+  border-bottom: 1px solid #ddd;
+}
+
+.custom-modal-header h2 {
+  margin: 0;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.custom-modal-body {
+  padding: 16px;
+}
+
+.tab-container {
+  height: calc(100vh - 200px); /* Adjust this value as needed */
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-tabs {
+  display: flex;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.nav-item {
+  margin-right: 16px;
+}
+
+.nav-link {
+  padding: 8px 16px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  outline: none;
+}
+
+.nav-link.active {
+  border-bottom: 2px solid #007bff;
+  color: #007bff;
+}
+
+.tab-content {
+  width: 100%; /* Ensure tab content takes full width */
+  flex-grow: 1;
+  overflow-y: auto;
+
+}
+
+.tab-content .tab-pane {
+  display: none;
+}
+
+.tab-content .tab-pane.active {
+  display: block;
+}
+
+.table-container {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.zebra-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.zebra-table th,
+.zebra-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.zebra-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.zebra-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #0e1b32;
+  color: white;
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import CountdownTimer from "./Timer";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
@@ -17,9 +17,11 @@ import {
 } from "@coreui/react";
 import "../Styles/Bid.css";
 
+import lottie from "lottie-web";
 import ToastComponent from "./Toast";
 import Chart from "./Chart";
 import ImageCover from "./Image";
+import load from "../assets/load.json";
 function Bid() {
   const { lotno } = useParams();
   const [item, setItem] = useState(null);
@@ -28,14 +30,29 @@ function Bid() {
 
   const [visible, setVisible] = useState(false);
   const [bidConfirmed, setBidConfirmed] = useState(false); // State to track bid confirmation
-  const [latestBid, setLatestBid] = useState(0);
+  const [latestBid, setLatestBid] = useState(1);
   const [allBids, setAllBids] = useState([]); // State to store all bids
 
   const [visibleA, setVisibleA] = useState(false);
+  const [activeTab, setActiveTab] = useState("graph");
+
+  const lottieContainer = useRef(null);
+  useEffect(() => {
+    if (!latestBid) {
+      const animation = lottie.loadAnimation({
+        container: lottieContainer.current,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        animationData: load,
+      });
+
+    
+    }
+  }, [latestBid]);
 
   useEffect(() => {
     fetchLatestBid();
-
     fetchData();
   }, [lotno]);
 
@@ -43,8 +60,8 @@ function Bid() {
     if (bidConfirmed) {
       const timeout = setTimeout(() => {
         setBidConfirmed(false);
-      }, 1800); // Reset bidConfirmed to false after 3 seconds
-      return () => clearTimeout(timeout); // Cleanup function to clear timeout
+      }, 1800);
+      return () => clearTimeout(timeout);
     }
   }, [bidConfirmed]);
 
@@ -52,15 +69,19 @@ function Bid() {
     try {
       const response = await axios.get("http://localhost:3000/biditems");
       const lot = response.data.find((item) => item.lot_no === lotno);
-      if (lot) {
+      if (lot && lot.bids.length > 0) {
         const sortedBids = lot.bids.sort(
           (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
         );
         const latestBid = sortedBids[0];
         setLatestBid(latestBid);
-        setAllBids(sortedBids); // Update allBids state with all bids
+        setAllBids(sortedBids);
       } else {
-        console.error(`Lot with lot number ${lotno} not found.`);
+        setLatestBid(null);
+        setAllBids([]);
+        console.error(
+          `Lot with lot number ${lotno} not found or no bids available.`
+        );
       }
     } catch (error) {
       console.error("Error fetching bid information:", error);
@@ -139,39 +160,41 @@ function Bid() {
 
   return (
     <div>
-
-
       <div className="terms">
         <Link to="/auction-terms" className="link11">
           Click here for auction terms and conditions
         </Link>
       </div>
-
       <div className="parent-container">
-      {latestBid ? (
-        <div className="latestbid">
-          <h1>
-            CURRENT BID {latestBid.amount} BY {latestBid.userbid_no}
-          </h1>
+
+
+
+        {latestBid ? (
+          <div className="latestbid">
+            <h1>
+              CURRENT BID ₹{latestBid.amount} BY {latestBid.userbid_no}
+            </h1>
+          </div>
+        ) : (
+          <div
+            ref={lottieContainer}
+            className="lottieContainer"
+            style={{ width: "100px", height: "100px" }}
+          ></div>
+        )}
+
+        <div className="bid-container">
+          <CountdownTimer lotno={lotno} onCountdownEnded={setCountdownEnded} />
+          <div className="details">
+            {item && (
+              <div>
+                <ImageCover item={item} />
+              </div>
+            )}
+          </div>
         </div>
-      ) : (
-        <p className="latestbid">UPCOMING AUCTION</p>
-      )}
-      <div className="bid-container">
-        <CountdownTimer lotno={lotno} onCountdownEnded={setCountdownEnded} />
-        <div className="details">
-          {item && (
-            <div>
-              <ImageCover item={item} />
-            </div>
-          )}
-        </div>
-      </div>
-   
 
-
-
-
+       
         <div className="bid-form">
           <h3>Bid Form</h3>
           <input
@@ -201,28 +224,82 @@ function Bid() {
               </div>
             ))}
           </div>
+          <div>
+            {/* Trigger button to open the modal */}
+            <button onClick={() => setVisibleA(true)}>Open Bid Stats</button>
 
-          <CButton color="primary" onClick={() => setVisibleA(true)}>
-            GRAPH
-          </CButton>
-          <COffcanvas
-            placement="bottom"
-            scroll={true}
-            visible={visibleA}
-            onHide={() => setVisibleA(false)}
-          >
-            <COffcanvasHeader>
-              <COffcanvasTitle>BID HISTORY LINE GRAPH DETAILS</COffcanvasTitle>
-              <CCloseButton
-                placement="end"
-                className="text-reset"
-                onClick={() => setVisibleA(false)}
-              />
-            </COffcanvasHeader>
-            <COffcanvasBody>
-              <Chart bids={allBids} />
-            </COffcanvasBody>
-          </COffcanvas>
+            {/* Custom Modal */}
+            {visibleA && (
+              <div className="custom-modal-overlay">
+                <div className="custom-modal">
+                  <div className="custom-modal-header">
+                    <h2>Bid Stats</h2>
+                    <button
+                      onClick={() => setVisibleA(false)}
+                      className="close-button"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                  <div className="custom-modal-body">
+                    <div className="tab-container">
+                      <ul className="nav nav-tabs">
+                        <li className="nav-item">
+                          <button
+                            className={`nav-link ${
+                              activeTab === "graph" ? "active" : ""
+                            }`}
+                            onClick={() => setActiveTab("graph")}
+                          >
+                            Graph
+                          </button>
+                        </li>
+                        <li className="nav-item">
+                          <button
+                            className={`nav-link ${
+                              activeTab === "table" ? "active" : ""
+                            }`}
+                            onClick={() => setActiveTab("table")}
+                          >
+                            Table
+                          </button>
+                        </li>
+                      </ul>
+                      <div className="tab-content">
+                        {activeTab === "graph" && (
+                          <div className="tab-pane active">
+                            <Chart bids={allBids} />
+                          </div>
+                        )}
+                        {activeTab === "table" && (
+                          <div className="tab-pane active">
+                            <table className="zebra-table">
+                              <thead>
+                                <tr>
+                                  <th>Bid Number</th>
+                                  <th>Amount</th>
+                                  <th>User</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {allBids.slice().map((bid, index) => (
+                                  <tr key={index}>
+                                    <td>{allBids.length - index}</td>
+                                    <td>₹{bid.amount}</td>
+                                    <td>{bid.userbid_no}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
 
           <CModal
             backdrop="static"
