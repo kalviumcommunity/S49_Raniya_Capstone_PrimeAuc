@@ -95,6 +95,7 @@ function Bid() {
         `http://localhost:3000/itemdetails/${lotno}`
       );
       setItem(response.data);
+      console.log(response.data)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -172,7 +173,7 @@ function Bid() {
         {latestBid ? (
           <div className="latestbid">
             <h1>
-              CURRENT BID ₹{latestBid.amount} BY {latestBid.userbid_no}
+              Latest Bid ₹{latestBid.amount}
             </h1>
           </div>
         ) : (
@@ -184,7 +185,13 @@ function Bid() {
         )}
 
         <div className="bid-container">
-          <CountdownTimer lotno={lotno} onCountdownEnded={setCountdownEnded} />
+        {item && item.status !== "upcoming" && item.status !== "Upcoming" ? (
+            <CountdownTimer lotno={lotno} onCountdownEnded={setCountdownEnded} />
+          ) : (
+            <p>upcoming auction</p>
+          )}
+
+
           <div className="details">
             {item && (
               <div>
