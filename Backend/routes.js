@@ -5,6 +5,7 @@ const { signUpSchema, loginSchema } = require('../Backend/models/userValidation'
 const Joi = require('joi');
 const Auction = require('./models/AuctionItem.js');
 const { Lot, validateLot, validateBid } = require('./models/BidItem.js');
+// to update status once countdown is done
 
 
 // Route to get all bititems and it details

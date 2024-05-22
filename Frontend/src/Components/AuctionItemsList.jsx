@@ -139,6 +139,23 @@ function AuctionItemsList() {
                     </div>
                   </div>
                 )}
+
+
+{item.status==="Closed" && (
+                  
+                    <div>
+                      <h1 className="live">CLOSED</h1>
+                    </div>
+                  
+                )}
+                
+{item.status==="Upcoming" && (
+                  
+                  <div>
+                    <h1 className="live">UPCOMING</h1>
+                  </div>
+                
+              )}
               </CCardImageOverlay>
             </Link>
             <CCardBody>
