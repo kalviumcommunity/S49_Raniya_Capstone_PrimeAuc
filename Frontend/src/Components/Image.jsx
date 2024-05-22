@@ -8,7 +8,7 @@ import AlbumRoundedIcon from '@mui/icons-material/AlbumRounded';
 
 export default function ImageCover({item}) {
   return (
-    <Card sx={{ minHeight: '280px', width: 320 }}>
+    <Card sx={{ minHeight: '380px', width: 380 }}>
       <CardCover>
         <img
           src={item.image}

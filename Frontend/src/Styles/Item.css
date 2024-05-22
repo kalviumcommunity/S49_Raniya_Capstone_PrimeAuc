@@ -80,10 +80,6 @@
     width: 100%; 
   }
 }
-
-
-
-
 .biditem-container {
   display: grid;
   grid-template-columns: 70% 30%;
@@ -122,25 +118,51 @@
   max-width: 600px;
 }
 
-.bid-button span,
-.bid-button i {
-  position: relative;
+
+
+
+
+.bid-button, .stats-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.bid-button i {
-  margin-left: 0.5em;
+/* Specific styles for the BID FOR LOT button */
+.bid-button {
+  background-color: #0d3764; /* Blue background */
+  color: white;
 }
 
-.bid-button .color {
-  width: 2em;
-  height: 2em;
-  border-radius: 2em;
-  background-color: var(--color);
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: -0.65em;
+.bid-button:hover {
+  background-color: #134a85; /* Darker blue on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.bid-button:disabled {
+  background-color: #c0c0c0; /* Gray background when disabled */
+  cursor: not-allowed;
+}
+
+/* Specific styles for the OPEN BID STATS button */
+.stats-button {
+  background-color: #115194; /* Green background */
+  color: white;
+}
+
+.stats-button:hover {
+  background-color: #0d3764; /* Darker green on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .item-image-container {
   display: flex;
   justify-content: center;

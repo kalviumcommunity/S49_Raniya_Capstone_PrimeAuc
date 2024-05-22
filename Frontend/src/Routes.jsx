@@ -9,7 +9,7 @@ import ItemDetails from "./Components/ItemDetails";
 import Listitem from "./Components/Listitem";
 import Bid from "./Components/Bid";
 import Aboutus from './Components/Aboutus';
-
+import Bidstats from './Components/Bidstats';
 function Routing() {
   return (
     <div>
@@ -24,6 +24,7 @@ function Routing() {
           <Route path="/itemdetails/:lotno" element={<ItemDetails/>} />
           <Route path="/sell/listitem" element={<Listitem/>} />
           <Route path="/bid/:lotno" element={<Bid/>} />
+          <Route path="/bidstas/:lotno" element={<Bidstats/>} />
 
         </Routes>
     </div>

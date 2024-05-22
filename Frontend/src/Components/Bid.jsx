@@ -87,7 +87,18 @@ function Bid() {
       console.error("Error fetching bid information:", error);
     }
   }
-
+  async function updateItemStatus() {
+    try {
+      const response = await axios.put(`http://localhost:3000/itemdetails/${lotno}`, {
+        status: "Closed",
+      });
+      console.log("Item status updated:", response.data);
+      fetchData(); // Fetch the updated item details
+    } catch (error) {
+      console.error("Error updating item status:", error);
+    }
+  }
+  
   // console.log(allBids,"allbids")
   const fetchData = async () => {
     try {
@@ -160,48 +171,33 @@ function Bid() {
   };
 
   return (
-    <div>
+    <>
       <div className="terms">
-        <Link to="/auction-terms" className="link11">
-          Click here for auction terms and conditions
-        </Link>
+  <Link to="/auction-terms" className="marquee">
+    Click here for auction terms and conditions
+  </Link>
+</div>
+            <div className="auction-container">
+      <div className="column">
+        {item && item.status !== "upcoming" && item.status !== "Upcoming" ? (
+          <CountdownTimer lotno={lotno} onCountdownEnded={() => { setCountdownEnded(true); updateItemStatus(); }} />
+        ) : (
+          <p>upcoming auction</p>
+        )}
+        <div className="details">
+          {item && <ImageCover item={item} />}
+        </div>
+        <button className="top-right-button" onClick={() => setVisibleA(true)}>Open Bid Stats</button>
       </div>
-      <div className="parent-container">
 
-
-
+      <div className="column">
         {latestBid ? (
           <div className="latestbid">
-            <h1>
-              Latest Bid ₹{latestBid.amount}
-            </h1>
+            <h1>Latest Bid ₹{latestBid.amount}</h1>
           </div>
         ) : (
-          <div
-            ref={lottieContainer}
-            className="lottieContainer"
-            style={{ width: "100px", height: "100px" }}
-          ></div>
+          <div ref={lottieContainer} className="lottieContainer" style={{ width: "100px", height: "100px" }}></div>
         )}
-
-        <div className="bid-container">
-        {item && item.status !== "upcoming" && item.status !== "Upcoming" ? (
-            <CountdownTimer lotno={lotno} onCountdownEnded={setCountdownEnded} />
-          ) : (
-            <p>upcoming auction</p>
-          )}
-
-
-          <div className="details">
-            {item && (
-              <div>
-                <ImageCover item={item} />
-              </div>
-            )}
-          </div>
-        </div>
-
-       
         <div className="bid-form">
           <h3>Bid Form</h3>
           <input
@@ -214,7 +210,6 @@ function Bid() {
           <button onClick={handleQuickBid} disabled={countdownEnded}>
             Quick Bid
           </button>
-
           <CButton
             color="primary"
             onClick={() => setVisible(true)}
@@ -222,19 +217,20 @@ function Bid() {
           >
             PLACE BID
           </CButton>
+        </div>
+      </div>
 
-          <div className="chatbox-bids">
-            {allBids.map((bid, index) => (
-              <div className="bid" key={index}>
-                <h4 className="user">{bid.userbid_no}</h4>
-                <p className="amount">₹{bid.amount}</p>
-              </div>
-            ))}
-          </div>
-          <div>
-            {/* Trigger button to open the modal */}
-            <button onClick={() => setVisibleA(true)}>Open Bid Stats</button>
-
+      <div className="column">
+        <div className="chatbox-bids">
+          {allBids.map((bid, index) => (
+            <div className="bid" key={index}>
+              <h4 className="user">{bid.userbid_no}</h4>
+              <p className="amount">₹{bid.amount}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
             {/* Custom Modal */}
             {visibleA && (
               <div className="custom-modal-overlay">
@@ -306,7 +302,7 @@ function Bid() {
                 </div>
               </div>
             )}
-          </div>
+       
 
           <CModal
             backdrop="static"
@@ -331,11 +327,17 @@ function Bid() {
               </CButton>
             </CModalFooter>
           </CModal>
-        </div>
-      </div>
-      {bidConfirmed && <ToastComponent bidAmount={bidAmount} />}{" "}
-      {/* Render the toast when bid is confirmed */}
-    </div>
+
+
+
+              {/* </div> */}
+
+
+      {bidConfirmed && <ToastComponent bidAmount={bidAmount} />} {/* Render the toast when bid is confirmed */}
+
+
+
+    </>
   );
 }
 
