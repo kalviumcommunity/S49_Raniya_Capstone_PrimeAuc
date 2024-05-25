@@ -6,6 +6,7 @@ import StepButton from '@mui/material/StepButton';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { ThemeProvider, createTheme, useMediaQuery } from '@mui/material';
 import "../Styles/Listitem.css"
 
 
@@ -23,7 +24,7 @@ const generateLotNo = () => {
   const randomNum = Math.floor(1000 + Math.random() * 9000);
   return `2024CS${randomNum}`;
 };
-
+const theme = createTheme();
 
 export default function Listitem() {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -161,21 +162,39 @@ export default function Listitem() {
     setIsModalOpen(false);
   };
 
+  const isSmallScreen = useMediaQuery('(max-width:600px)');
 
   return (
+    <ThemeProvider theme={theme}>
     <div className="sellboxcontainer" style={{ display: 'flex', justifyContent: 'center' }}>
-      <Box sx={{ width: '70%' }}>
-        <Stepper nonLinear activeStep={activeStep}>
-          {steps.map((label, index) => (
-            <Step key={label} completed={completed[index]}>
-              <StepButton color="inherit" onClick={handleStep(index)} disabled={isSubmitted}>
-                {label}
-              </StepButton>
-            </Step>
-          ))}
-        </Stepper>
+   <Box
+        sx={{
+          width: {
+            xs: '95%', // 0px and up
+            sm: '90%', // 600px and up
+            md: '90%', // 900px and up
+          },
+          typography: {
+            xs: 'body2', // smaller screens
+            sm: 'body1', // small screens
+            md: 'body1', // medium screens
+           
+          }
+        }}
+      >
+         <Stepper orientation={isSmallScreen ? "vertical" : "horizontal"} nonLinear activeStep={activeStep}>
+            {steps.map((label, index) => (
+              <Step key={label} completed={completed[index]}>
+                <StepButton color="inherit" onClick={handleStep(index)} disabled={isSubmitted}>
+                  <Typography sx={{ typography: { xs: 'caption', sm: 'body2', md: 'body1', lg: 'body1' } }}>
+                    {label}
+                  </Typography>
+                </StepButton>
+              </Step>
+            ))}
+          </Stepper>
         <div className="sell-form">
-          <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
+          <Typography sx={{ mt: 2, mb: 1, py: 1 ,typography: { xs: 'caption', sm: 'body2', md: 'body1', lg: 'h6' }}}>
             Step {activeStep + 1}
           </Typography>
           <form onSubmit={(e) => e.preventDefault()}>
@@ -323,6 +342,8 @@ export default function Listitem() {
         </Box>
       </Modal>
     </div>
+
+    </ThemeProvider>
   );
 }
 
