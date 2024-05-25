@@ -3,9 +3,52 @@ const router = express.Router();
 const { UserModel } = require('../Backend/models/User'); // Correct path to user model
 const { signUpSchema, loginSchema } = require('../Backend/models/userValidation');
 const Joi = require('joi');
+const multer = require('multer');
 const Auction = require('./models/AuctionItem.js');
 const { Lot, validateLot, validateBid } = require('./models/BidItem.js');
 
+
+// Multer setup for file uploads
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+// Route to handle form submission
+router.post('/items', upload.single('image'), async (req, res) => {
+  try {
+    const { category, title, description, startTime, endTime, reservePrice, lot_no } = req.body;
+    const image = req.file; // Multer handles the file
+
+    // Convert image buffer to base64 string (if you want to store it as a string)
+    const imageBase64 = image ? image.buffer.toString('base64') : null;
+
+    const newItem = {
+      title: title,
+      description: description,
+      lot_no: lot_no,
+      image: imageBase64,
+      reserve_price: reservePrice,
+      start_time: startTime,
+      end_time: endTime,
+      status: 'Upcoming', 
+      starting_price: reservePrice * 0.25
+    };
+
+    // Find the auction document by category and update
+    const auction = await Auction.findOneAndUpdate(
+      { category: category },
+      { $push: { items: newItem } },
+      { new: true, upsert: true } // Create a new document if none exists
+    );
+
+    res.status(200).json({ success: true, auction: auction });
+  } catch (error) {
+    console.error('Error saving item:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+
+//to update the status to closed once countdown ends
 router.put('/items', async (req, res) => {
   const { lot_no, status } = req.body;
 
