@@ -24,7 +24,7 @@ function Routing() {
           <Route path="/itemdetails/:lotno" element={<ItemDetails/>} />
           <Route path="/sell/listitem" element={<Listitem/>} />
           <Route path="/bid/:lotno" element={<Bid/>} />
-          <Route path="/bidstas/:lotno" element={<Bidstats/>} />
+          <Route path="/bidstats/:lotno" element={<Bidstats/>} />
 
         </Routes>
     </div>

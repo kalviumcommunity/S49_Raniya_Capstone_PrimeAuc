@@ -5,7 +5,26 @@ const { signUpSchema, loginSchema } = require('../Backend/models/userValidation'
 const Joi = require('joi');
 const Auction = require('./models/AuctionItem.js');
 const { Lot, validateLot, validateBid } = require('./models/BidItem.js');
-// to update status once countdown is done
+
+router.put('/items', async (req, res) => {
+  const { lot_no, status } = req.body;
+
+  try {
+    const updatedItem = await Auction.findOneAndUpdate(
+      { 'items.lot_no': lot_no },
+      { $set: { 'items.$.status': status } },
+      { new: true }
+    );
+
+    if (updatedItem) {
+      res.status(200).send({ message: 'Status updated successfully', item: updatedItem });
+    } else {
+      res.status(404).send({ message: 'Item not found' });
+    }
+  } catch (error) {
+    res.status(500).send({ message: 'Server error', error });
+  }
+});
 
 
 // Route to get all bititems and it details

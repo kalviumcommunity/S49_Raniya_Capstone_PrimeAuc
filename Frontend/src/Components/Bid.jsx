@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import CountdownTimer from "./Timer";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link,useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   CModal,
@@ -9,11 +9,7 @@ import {
   CModalHeader,
   CModalBody,
   CModalTitle,
-  COffcanvas,
-  COffcanvasHeader,
-  COffcanvasBody,
-  COffcanvasTitle,
-  CCloseButton,
+ 
 } from "@coreui/react";
 import "../Styles/Bid.css";
 
@@ -24,6 +20,8 @@ import ImageCover from "./Image";
 import load from "../assets/load.json";
 function Bid() {
   const { lotno } = useParams();
+  const navigate = useNavigate(); // Use the useNavigate hook for navigation
+
   const [item, setItem] = useState(null);
   const [bidAmount, setBidAmount] = useState("");
   const [countdownEnded, setCountdownEnded] = useState(false); // State to track if countdown has ended
@@ -56,6 +54,16 @@ function Bid() {
     fetchData();
   }, [lotno]);
 
+
+  useEffect(() => {
+    if (countdownEnded) {
+      const timeout = setTimeout(() => {
+        navigate(`/bidstats/${lotno}`);
+      }, 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [countdownEnded, navigate, lotno]);
+
   useEffect(() => {
     if (bidConfirmed) {
       const timeout = setTimeout(() => {
@@ -87,17 +95,6 @@ function Bid() {
       console.error("Error fetching bid information:", error);
     }
   }
-  async function updateItemStatus() {
-    try {
-      const response = await axios.put(`http://localhost:3000/itemdetails/${lotno}`, {
-        status: "Closed",
-      });
-      console.log("Item status updated:", response.data);
-      fetchData(); // Fetch the updated item details
-    } catch (error) {
-      console.error("Error updating item status:", error);
-    }
-  }
   
   // console.log(allBids,"allbids")
   const fetchData = async () => {
@@ -118,7 +115,7 @@ function Bid() {
 
   const handleQuickBid = () => {
     if (!latestBid) {
-      setBidAmount("500");
+      setBidAmount("1000");
     } else {
       const newBidAmount = latestBid.amount + 500;
       setBidAmount(newBidAmount.toString());
@@ -130,12 +127,19 @@ function Bid() {
     const userId = localStorage.getItem("userId");
     const timestamp = new Date().toISOString();
 
-    // Check if bid amount meets the increment requirement
-    if (parseInt(bidAmount) < parseInt(latestBid.amount) + 500) {
-      alert("Bid should be at least 500 higher than the current bid.");
-      return; // Stop further execution
+    if (latestBid) {
+      // Check if bid amount meets the increment requirement for subsequent bids
+      if (parseInt(bidAmount) < parseInt(latestBid.amount) + 500) {
+        alert("Bid should be at least 500 higher than the current bid.");
+        return;
+      }
+    } else {
+      // For starting bid, ensure it is at least 1000
+      if (parseInt(bidAmount) < 1000) {
+        alert("Starting bid should be at least 1000.");
+        return;
+      }
     }
-
     // Construct bid object
     const bid = {
       userbid_no: userId,
@@ -169,7 +173,6 @@ function Bid() {
       return null;
     }
   };
-
   return (
     <>
       <div className="terms">
@@ -180,7 +183,7 @@ function Bid() {
             <div className="auction-container">
       <div className="column">
         {item && item.status !== "upcoming" && item.status !== "Upcoming" ? (
-          <CountdownTimer lotno={lotno} onCountdownEnded={() => { setCountdownEnded(true); updateItemStatus(); }} />
+          <CountdownTimer lotno={lotno} onCountdownEnded={setCountdownEnded}/>
         ) : (
           <p>upcoming auction</p>
         )}
