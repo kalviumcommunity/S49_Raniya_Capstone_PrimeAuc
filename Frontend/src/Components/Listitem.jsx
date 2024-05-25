@@ -79,6 +79,41 @@ export default function Listitem() {
   };
 
 
+  const validateForm = () => {
+    const { category, title, description, startTime, endTime, reservePrice, image } = formData;
+
+
+    // Check if all required fields are filled
+    if (!category || !title || !description || !startTime || !endTime || !reservePrice || !image) {
+      alert("Please fill in all required fields.");
+      return false;
+    }
+
+
+    // Check if start time is at least 3 days from now
+    const startDate = new Date(startTime);
+    const minStartDate = new Date();
+    minStartDate.setDate(minStartDate.getDate() + 3);
+    if (startDate < minStartDate) {
+      alert("Start time must be at least 3 days from the current date.");
+      return false;
+    }
+
+
+    // Check if end time is at least 24 hours after start time
+    const endDate = new Date(endTime);
+    const minEndDate = new Date(startDate);
+    minEndDate.setDate(minEndDate.getDate() + 1);
+    if (endDate < minEndDate) {
+      alert("End time must be at least 24 hours after the start time.");
+      return false;
+    }
+
+
+    return true;
+  };
+
+
   const handleComplete = () => {
     if (isLastStep() && !validateForm()) {
       return;
