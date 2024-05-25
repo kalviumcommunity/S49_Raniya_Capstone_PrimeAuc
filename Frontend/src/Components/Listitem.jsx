@@ -79,7 +79,6 @@ export default function Listitem() {
   };
 
 
-
   const handleComplete = () => {
     if (isLastStep() && !validateForm()) {
       return;
@@ -111,6 +110,14 @@ export default function Listitem() {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value
+    }));
+  };
+
+
+  const handleImageUpload = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      image: e.target.files[0]
     }));
   };
 
@@ -193,8 +200,50 @@ export default function Listitem() {
                 />
               </div>
             )}
-            
-           
+            {activeStep === 3 && (
+              <div className="sellstep">
+                <label className="sell-label">Reserve Price:</label>
+                <input
+                  className="sell-input"
+                  type="number"
+                  name="reservePrice"
+                  value={formData.reservePrice}
+                  onChange={handleChange}
+                />
+                <label className="sell-label">Start Price (25% of Reserve Price):</label>
+                <input
+                  className="sell-input"
+                  type="number"
+                  name="startPrice"
+                  value={formData.reservePrice * 0.25}
+                  disabled
+                />
+              </div>
+            )}
+            {activeStep === 4 && (
+              <div className="sellstep">
+                <label className="sell-label">Image:</label>
+                <input
+                  className="sell-file-input"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                />
+              </div>
+            )}
+            {activeStep === 5 && (
+              <div className="sellstep">
+                <h3 className="sell-heading">Review and Submit</h3>
+                <p className="sell-review">Category: {formData.category}</p>
+                <p className="sell-review">Title: {formData.title}</p>
+                <p className="sell-review">Description: {formData.description}</p>
+                <p className="sell-review">Start Time: {formData.startTime}</p>
+                <p className="sell-review">End Time: {formData.endTime}</p>
+                <p className="sell-review">Reserve Price: {formData.reservePrice}</p>
+                <p className="sell-review">Start Price: {formData.reservePrice * 0.25}</p>
+                <p className="sell-review">Image: {formData.image ? formData.image.name : "No image uploaded"}</p>
+              </div>
+            )}
           </form>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
