@@ -7,7 +7,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { ThemeProvider, createTheme, useMediaQuery } from '@mui/material';
-import "../Styles/Listitem.css"
+import "../Styles/Listitem.css";
+import axios from 'axios';
+
 
 
 const steps = [
@@ -136,10 +138,30 @@ export default function Listitem() {
   };
 
 
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     console.log("Form submitted:", formData);
+    const formDataToSend = new FormData();
+    formDataToSend.append('category', formData.category);
+    formDataToSend.append('title', formData.title);
+    formDataToSend.append('description', formData.description);
+    formDataToSend.append('startTime', formData.startTime);
+    formDataToSend.append('endTime', formData.endTime);
+    formDataToSend.append('reservePrice', formData.reservePrice);
+    formDataToSend.append('lot_no', formData.lot_no);
+    formDataToSend.append('image', formData.image);
+  
+    try {
+      const response = await axios.post('http://localhost:3000/items', formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      console.log('Form submitted:', response.data);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
   };
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -208,10 +230,10 @@ export default function Listitem() {
                   onChange={handleChange}
                 >
                   <option value="">Select Category</option>
-                  <option value="art">Art</option>
-                  <option value="antiques">Antiques</option>
-                  <option value="accessories">Accessories</option>
-                  <option value="other">Other</option>
+                  <option value="Art">Art</option>
+                  <option value="Antiques and Collectables">Antiques and Collectables</option>
+                  <option value="Accessories">Accessories</option>
+                  <option value="Others">Others</option>
                 </select>
               </div>
             )}
