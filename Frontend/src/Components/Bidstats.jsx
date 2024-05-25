@@ -1,35 +1,34 @@
-import React from 'react'
-import Chart from "./Chart"
+import React, { useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function Bidstats() {
+  const { lotno } = useParams();
+
+  useEffect(() => {
+    updateStatus(lotno, "Closed");
+  }, [lotno]);
+
+  const updateStatus = async (lotNo, newStatus) => {
+    console.log(newStatus)
+    try {
+      const response = await axios.put("http://localhost:3000/items", {
+        lot_no: lotNo,
+        status: newStatus,
+      });
+
+      console.log("Status updated successfully:", response.data);
+    } catch (error) {
+      console.error("Error updating status:", error);
+    }
+  };
+
   return (
     <div>
-        <table className="zebra-table">
-                              <thead>
-                                <tr>
-                                  <th>Bid Number</th>
-                                  <th>Amount</th>
-                                  <th>User</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {allBids.slice().map((bid, index) => (
-                                  <tr key={index}>
-                                    <td>{allBids.length - index}</td>
-                                    <td>₹{bid.amount}</td>
-                                    <td>{bid.userbid_no}</td>
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-
-
-
-                            <Chart/>
-
+      <h1>Bid Statistics for Lot {lotno}</h1>
       
     </div>
-  )
+  );
 }
 
-export default Bidstats
+export default Bidstats;

@@ -91,10 +91,10 @@ function Sell() {
             <h2>CHOOSE CATEGORY</h2>
             <p>
               Select one from
-              <span>
+              <span  className="highlight">
                 {" "}
                 Art, Antiques and Collectibles, Others, or Accessories.
-              </span>{" "}
+              </span >{" "}
               <div className="lottiecontainer" ref={(el) => lottieContainers.current[4] = el}></div>
             </p>
            
@@ -114,10 +114,10 @@ function Sell() {
             <h2>SET TIME</h2>
             <p>
               Set the time for the auction.{" "}
-              <span>
+              <span  className="highlight">
                 {" "}
                 End time should be at least 24 hours after the start time
-              </span>{" "}
+              </span >{" "}
             </p>
             <div className="lottiecontainer" ref={(el) => lottieContainers.current[2] = el}></div>
             
@@ -128,7 +128,7 @@ function Sell() {
             <h2>SET RESERVE PRICE</h2>
             <p>
               Input the minimum price you're willing to accept for the item
-              <span> Starting price should be 25% of the reserve price.</span>
+              <span  className="highlight"> Starting price should be 25% of the reserve price.</span >
             </p>
             <div className="lottiecontainer" ref={(el) => lottieContainers.current[1] = el}></div>
           

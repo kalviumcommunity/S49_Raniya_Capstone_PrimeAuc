@@ -143,31 +143,6 @@
     transform: translateX(-100%);
   }
 }
-
-
-/* Add these styles in your CSS file */
-.top-right-button {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  background-color: #0e1b32;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.top-right-button:hover {
-  background-color: #0a1426;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-
 /* Add these styles in your CSS file */
 .bid-form {
   background-color: #f8f9fa; /* Light grey background */
