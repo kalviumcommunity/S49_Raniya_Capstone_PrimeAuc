@@ -26,7 +26,7 @@ const generateLotNo = (() => {
   let serialNumber = 1;
 
   const getAlphaSequence = (index) => {
-    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const firstLetter = alphabet[Math.floor(index / 26)];
     const secondLetter = alphabet[index % 26];
     return `${firstLetter}${secondLetter}`;
@@ -45,7 +45,7 @@ const generateLotNo = (() => {
     const serialPart = serialNumber.toString().padStart(4, '0');
     serialNumber++;
 
-    return `${yearPart}-${alphaPart}-${serialPart}`;
+    return `${yearPart}${alphaPart}${serialPart}`;
   };
 })();
 
@@ -355,6 +355,7 @@ export default function Listitem() {
                 <div className="sellstep">
                   <label className="sell-label">Image:</label>
                   <input
+                    name="image"
                     className="sell-file-input"
                     type="file"
                     accept="image/*"
