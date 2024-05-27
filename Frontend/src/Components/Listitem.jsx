@@ -10,6 +10,8 @@ import { ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
 import "../Styles/Listitem.css";
 import axios from "axios";
 import { useState } from "react";
+import { UniqueNumberGenerator } from './UniqueNumberGenerator';
+
 
 const steps = [
   "Choose Category",
@@ -19,39 +21,14 @@ const steps = [
   "Upload Image",
   "Review and Submit",
 ];
-const generateLotNo = (() => {
-  const currentYear = new Date().getFullYear();
-  const yearPart = (currentYear % 100).toString().padStart(2, '0').repeat(2);
-  let sequenceIndex = 0;
-  let serialNumber = 1;
 
-  const getAlphaSequence = (index) => {
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const firstLetter = alphabet[Math.floor(index / 26)];
-    const secondLetter = alphabet[index % 26];
-    return `${firstLetter}${secondLetter}`;
-  };
-
-  return () => {
-    if (serialNumber > 9999) {
-      serialNumber = 1;
-      sequenceIndex++;
-    }
-    if (sequenceIndex >= 26 * 26) {
-      throw new Error("All lot numbers are exhausted.");
-    }
-
-    const alphaPart = getAlphaSequence(sequenceIndex);
-    const serialPart = serialNumber.toString().padStart(4, '0');
-    serialNumber++;
-
-    return `${yearPart}${alphaPart}${serialPart}`;
-  };
-})();
 
 const theme = createTheme();
 
+
 export default function Listitem() {
+  const { generateNextNumber } = UniqueNumberGenerator();
+  const [lotNo, setLotNo] = useState(null); // Initialize lotNo state
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
   const [formData, setFormData] = useState({
@@ -68,33 +45,48 @@ export default function Listitem() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+
   const totalSteps = () => steps.length;
+
 
   const completedSteps = () => Object.keys(completed).length;
 
+
   const isLastStep = () => activeStep === totalSteps() - 1;
 
+
   const allStepsCompleted = () => completedSteps() === totalSteps();
+
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
+
     if (activeStep === 0 && !formData.lot_no) {
-      const lotNo = generateLotNo();
-      setFormData((prevData) => ({
-        ...prevData,
-        lot_no: lotNo,
-      }));
+      // Generate lot number and update state
+      generateNextNumber().then((number) => {
+        setLotNo(number);
+        setFormData((prevData) => ({
+          ...prevData,
+          lot_no: number,
+        }));
+      });
     }
   };
+ 
+
+
+
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+
   const handleStep = (step) => () => {
     setActiveStep(step);
   };
+
 
   const validateForm = () => {
     const {
@@ -138,14 +130,17 @@ export default function Listitem() {
     return true;
   };
 
+
   const handleComplete = () => {
     if (isLastStep() && !validateForm()) {
       return;
     }
 
+
     const newCompleted = completed;
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
+
 
     if (allStepsCompleted()) {
       handleSubmit();
@@ -155,6 +150,7 @@ export default function Listitem() {
       handleNext();
     }
   };
+
 
   const handleSubmit = async () => {
     console.log("Form submitted:", formData);
@@ -168,6 +164,7 @@ export default function Listitem() {
     formDataToSend.append("lot_no", formData.lot_no);
     formDataToSend.append("image", formData.image);
 
+
     try {
       const response = await axios.post(
         "http://localhost:3000/items",
@@ -179,11 +176,13 @@ export default function Listitem() {
         }
       );
 
+
       console.log("Form submitted:", response.data);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -193,6 +192,7 @@ export default function Listitem() {
     }));
   };
 
+
   const handleImageUpload = (e) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -200,11 +200,14 @@ export default function Listitem() {
     }));
   };
 
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
+
   const isSmallScreen = useMediaQuery("(max-width:600px)");
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -429,8 +432,7 @@ export default function Listitem() {
               Lot Number
             </Typography>
             <Typography id="modal-description" sx={{ mt: 2 }}>
-              Your generated lot number is: {formData.lot_no}
-            </Typography>
+            Your generated lot number is: {lotNo !== null ? lotNo : "Loading..."}            </Typography>
             <Button onClick={handleCloseModal}>Close</Button>
           </Box>
         </Modal>
