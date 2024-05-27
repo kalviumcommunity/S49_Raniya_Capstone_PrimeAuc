@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const connectToDB =require("./Connection.js");
 const bodyParser=require('body-parser');
-
+const path = require('path');
 
 // Import routes after defining the MongoDB client
 const routes = require("./routes");
@@ -12,6 +12,9 @@ const routes = require("./routes");
 // Creating an Express app
 const app = express();
 app.use(bodyParser.json());
+
+
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 const cors = require("cors");
 app.use(cors());
@@ -30,4 +33,5 @@ connectToDB().then(() => {
 });
 
 // Exporting the Express app
+
 module.exports = app;

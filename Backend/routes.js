@@ -7,29 +7,41 @@ const multer = require('multer');
 const Auction = require('./models/AuctionItem.js');
 const { Lot, validateLot, validateBid } = require('./models/BidItem.js');
 
+const path =require('path');
 
 // Multer setup for file uploads
-const storage = multer.memoryStorage();
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/uploads');
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  }
+});
+
 const upload = multer({ storage: storage });
 
 // Route to handle form submission
 router.post('/items', upload.single('image'), async (req, res) => {
   try {
     const { category, title, description, startTime, endTime, reservePrice, lot_no } = req.body;
-    const image = req.file; // Multer handles the file
+    const file = req.file; // Multer handles the file
 
-    // Convert image buffer to base64 string (if you want to store it as a string)
-    const imageBase64 = image ? image.buffer.toString('base64') : null;
+    if (!file) {
+      return res.status(400).json({ success: false, error: 'No file uploaded' });
+    }
+
+    const imagePath = `http://localhost:3000/uploads/${file.filename}`;
 
     const newItem = {
       title: title,
       description: description,
       lot_no: lot_no,
-      image: imageBase64,
+      image: imagePath, // Save only the image path
       reserve_price: reservePrice,
       start_time: startTime,
       end_time: endTime,
-      status: 'Upcoming', 
+      status: 'Upcoming',
       starting_price: reservePrice * 0.25
     };
 
@@ -46,7 +58,6 @@ router.post('/items', upload.single('image'), async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 });
-
 
 //to update the status to closed once countdown ends
 router.put('/items', async (req, res) => {
