@@ -12,6 +12,7 @@ import axios from "axios";
 import { useState } from "react";
 import { UniqueNumberGenerator } from './UniqueNumberGenerator';
 
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 
 const steps = [
   "Choose Category",
@@ -27,6 +28,7 @@ const theme = createTheme();
 
 
 export default function Listitem() {
+  const navigate = useNavigate();
   const { generateNextNumber } = UniqueNumberGenerator();
   const [lotNo, setLotNo] = useState(null); // Initialize lotNo state
   const [activeStep, setActiveStep] = useState(0);
@@ -181,6 +183,14 @@ export default function Listitem() {
     } catch (error) {
       console.error("Error submitting form:", error);
     }
+
+
+    setIsModalOpen(true);
+    setTimeout(() => {
+      setIsModalOpen(false);
+      setIsSubmitted(true);
+      navigate("/auctionitemlist"); // Redirect to /auctionitemlist
+    }, 4000);
   };
 
 
@@ -203,6 +213,10 @@ export default function Listitem() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    // If modal is closed and form is submitted, redirect immediately
+    if (isSubmitted) {
+      navigate("/auctionitemlist"); // Redirect to /auctionitemlist
+    }
   };
 
 
