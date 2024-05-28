@@ -1,7 +1,7 @@
 // routes/auctionRoutes.js
 const express = require('express');
 const router = express.Router();
-const auctionController = require('../controllers/auctionitemlistcontroller');
+const auctionController = require('../controllers/auctionlistcontroller');
 
 router.get('/items', auctionController.getAllItems);
 
