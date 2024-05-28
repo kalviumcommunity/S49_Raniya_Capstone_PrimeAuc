@@ -17,7 +17,7 @@ import lottie from "lottie-web";
 import ToastComponent from "./Toast";
 import Chart from "./Chart";
 import ImageCover from "./Image";
-import load from "../assets/load.json";
+import load from "../assets/animations/load.json";
 function Bid() {
   const { lotno } = useParams();
   const navigate = useNavigate(); // Use the useNavigate hook for navigation
@@ -274,7 +274,7 @@ function Bid() {
                       <div className="tab-content">
                         {activeTab === "graph" && (
                           <div className="tab-pane active">
-                            <Chart bids={allBids} />
+                            <Chart bids={allBids} style={{ width: '700px', height: '350px'}} />
                           </div>
                         )}
                         {activeTab === "table" && (

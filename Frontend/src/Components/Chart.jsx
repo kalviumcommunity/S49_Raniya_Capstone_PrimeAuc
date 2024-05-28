@@ -7,7 +7,7 @@ ChartJS.register(
   CategoryScale, LinearScale, PointElement, Filler
 );
 
-function Chart({ bids }) {
+function Chart({ bids ,style}) {
   const [data, setData] = useState({
     labels: [],
     datasets: [
@@ -47,7 +47,7 @@ function Chart({ bids }) {
 
   return (
   
-    <div className="Chart" style={{ width: '700px', height: '350px'}}>
+    <div className="Chart" style={style}>
       <Line data={data} />
     </div>
 

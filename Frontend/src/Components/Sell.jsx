@@ -7,12 +7,12 @@ import art from "../assets/images/art.png";
 import acc from "../assets/images/acc.png";
 import oth from "../assets/images/oth.png";
 import ant from "../assets/images/ant.png";
-import s1 from "../assets/s1.json";
-import s2 from "../assets/s2.json";
-import s3 from "../assets/s3.json";
-import s4 from "../assets/s4.json";
-import s5 from "../assets/s5.json";
-import s6 from "../assets/s6.json";
+import s1 from "../assets/animations/s1.json";
+import s2 from "../assets/animations/s2.json";
+import s3 from "../assets/animations/s3.json";
+import s4 from "../assets/animations/s4.json";
+import s5 from "../assets/animations/s5.json";
+import s6 from "../assets/animations/s6.json";
 import "../Styles/Sell.css";
 
 function Sell() {
