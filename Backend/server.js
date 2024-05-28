@@ -1,56 +1,35 @@
 // Importing required libraries and dependencies
-const express = require('express');
 require("dotenv").config();
-const fs = require('fs');
-
-const connectToDB =require("./Connection.js");
+const express = require('express');
+const connectToDB =require("./connection/Connection.js");
+const port = process.env.PUBLIC_PORT || 3000;
 const bodyParser=require('body-parser');
 const path = require('path');
-
-// Import routes after defining the MongoDB client
-const routes = require("./routes");
-
-// Creating an Express app
+const fs = require('fs');
 const app = express();
-app.use(bodyParser.json());
-
-
-app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
-
 const cors = require("cors");
+
+const auctionRoutes = require('./routes/auctionitemlistroutes.js');
+const lotnoRoutes = require('./routes/lotnoroutes.js');
+const listItemRoutes = require('./routes/listitemroutes.js');
+const bidItemRoutes = require('./routes/biditemcontroller.js');
+const authRoutes = require('./routes/authroutes.js');
+const userRoutes = require('./routes/userroutes.js');
+const itemRoutes = require('./routes/itemroutes.js'); // Including item routes
+
+
+app.use(bodyParser.json());
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 app.use(cors());
 
-// Setting the server port
-const port = process.env.PUBLIC_PORT || 3000;
+app.use('/', auctionRoutes);
+app.use('/', lotnoRoutes);
+app.use('/', listItemRoutes);
+app.use('/', bidItemRoutes);
+app.use('/', userRoutes);
+app.use('/', authRoutes);
+app.use('/', itemRoutes); // Mounting the item routes as well
 
-
-let sequence = 'AA0000';
-
-// Load sequence from file on startup
-fs.readFile('sequence.txt', 'utf8', (err, data) => {
-  if (!err && data) {
-    sequence = data;
-  }
-});
-
-app.get('/current-sequence', (req, res) => {
-  res.json({ sequence });
-});
-
-app.post('/update-sequence', (req, res) => {
-  sequence = req.body.sequence;
-  fs.writeFile('sequence.txt', sequence, (err) => {
-    if (err) {
-      console.error("Error saving sequence:", err);
-      res.status(500).json({ error: 'Failed to save sequence' });
-    } else {
-      res.status(200).json({ message: 'Sequence updated successfully' });
-    }
-  });
-});
-
-// Routes
-app.use("/", routes); // Mount the routes at the root URL
 
 // Connect to DB and start server
 connectToDB().then(() => {
@@ -60,5 +39,4 @@ connectToDB().then(() => {
 });
 
 // Exporting the Express app
-
 module.exports = app;

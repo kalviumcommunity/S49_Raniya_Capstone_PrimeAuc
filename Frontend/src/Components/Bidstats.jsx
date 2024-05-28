@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Chart from "./Chart";
 
 function Bidstats() {
   const { lotno } = useParams();
+  const [lotBids, setLotBids] = useState([]);
 
   useEffect(() => {
     checkAndUpdateStatus(lotno, "Closed");
@@ -41,10 +43,12 @@ function Bidstats() {
     try {
       const response = await axios.get("http://localhost:3000/biditems");
       const bidItems = response.data;
-      const lotBids = bidItems.filter(item => item.lot_no === lotNo);
+      const lotBidsData = bidItems.filter(item => item.lot_no === lotNo);
+      console.log("All bids:", lotBidsData);
 
-      if (lotBids.length > 0) {
-        console.log("Bids for lot", lotNo, ":", lotBids[0].bids);
+      if (lotBidsData.length > 0) {
+        setLotBids(lotBidsData[0].bids);
+        console.log("Bids for lot", lotNo, ":", lotBidsData[0].bids);
       } else {
         console.log("No bids found for lot", lotNo);
       }
@@ -54,10 +58,13 @@ function Bidstats() {
   };
 
   return (
-    <div>
-      <h1>Bid Statistics for Lot {lotno}</h1>
-    </div>
+    <div >
+     
+      {lotBids ? <Chart bids={lotBids} style={{ width: '1080px', height: '1080px'}} /> : <p>Loading bids...</p>}
+
+   </div>
   );
 }
 
 export default Bidstats;
+

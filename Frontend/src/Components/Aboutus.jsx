@@ -1,7 +1,7 @@
 import React from 'react'
 import "../Styles/Aboutus.css";
 import  { useEffect,useRef } from "react";
-import pop from "../assets/pop.json";
+import pop from "../assets/animations/pop.json";
 import lottie from "lottie-web";
 
 function Aboutus() {

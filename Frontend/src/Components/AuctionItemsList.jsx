@@ -15,7 +15,7 @@ import "../Styles/Item.css";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { Link } from "react-router-dom";
-import live from "../assets/live.json";
+import live from "../assets/animations/live.json";
 
 function AuctionItemsList() {
   const [items, setItems] = useState([]);
