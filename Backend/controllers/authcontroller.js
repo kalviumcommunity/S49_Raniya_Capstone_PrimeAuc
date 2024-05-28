@@ -1,6 +1,8 @@
-// controllers/authController.js
-const { UserModel } = require('../models/User.js'); // Correct path to user model
+const { UserModel } = require('../models/User.js');
 const { signUpSchema, loginSchema } = require('../validation/userValidation.js');
+const bcrypt = require('bcrypt');
+
+
 const signupUser = async (req, res) => {
   console.log(req.body);
   try {
@@ -9,15 +11,23 @@ const signupUser = async (req, res) => {
     if (error) {
       return res.status(400).json({ error: error.details[0].message });
     }
-    
+
     // Check if the user already exists
     const existingUser = await UserModel.findOne({ email: req.body.email });
     if (existingUser) {
       return res.status(409).json({ error: 'User already exists' });
     }
-    
-    // Create a new user
-    const newUser = await UserModel.create(req.body);
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    // Create a new user with the hashed password
+    const newUser = new UserModel({
+      ...req.body,
+      password: hashedPassword,
+    });
+
+    await newUser.save();
     return res.status(201).json(newUser);
   } catch (err) {
     console.error(err);
@@ -33,19 +43,21 @@ const loginUser = async (req, res) => {
     if (error) {
       return res.status(400).json({ error: error.details[0].message });
     }
-    
+
     // Check if the user exists
     const user = await UserModel.findOne({ email: req.body.email });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-    
+
     // Check if the password matches
-    if (req.body.password !== user.password) {
+    const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+    if (!isPasswordValid) {
       return res.status(400).json({ error: 'Invalid password' });
     }
+
     
-    return res.status(200).json(user);
+    return res.status(200).json({ user, token });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Internal Server Error' });
