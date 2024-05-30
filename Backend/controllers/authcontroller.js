@@ -2,7 +2,6 @@ const { UserModel } = require('../models/User.js');
 const { signUpSchema, loginSchema } = require('../validation/userValidation.js');
 const bcrypt = require('bcrypt');
 
-
 const signupUser = async (req, res) => {
   console.log(req.body);
   try {
@@ -18,8 +17,11 @@ const signupUser = async (req, res) => {
       return res.status(409).json({ error: 'User already exists' });
     }
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    // Generate a salt
+    const salt = await bcrypt.genSalt(10);
+
+    // Hash the password with the generated salt
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     // Create a new user with the hashed password
     const newUser = new UserModel({
@@ -28,13 +30,12 @@ const signupUser = async (req, res) => {
     });
 
     await newUser.save();
-    return res.status(201).json(newUser);
+    return res.status(201).json({ message: 'User created successfully', user: newUser });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 };
-
 const loginUser = async (req, res) => {
   console.log(req.body);
   try {
@@ -56,8 +57,7 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ error: 'Invalid password' });
     }
 
-    
-    return res.status(200).json({ user, token });
+    return res.status(200).json({ message: 'Login successful', user });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Internal Server Error' });
