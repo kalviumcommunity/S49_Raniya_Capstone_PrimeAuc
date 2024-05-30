@@ -10,15 +10,6 @@ const fs = require("fs");
 // Create an instance of Express app
 const app = express();
 
-// Importing routes
-const auctionRoutes = require("./routes/auctionlistroutes.js");
-const bidItemRoutes = require("./routes/bidcontroller.js");
-const listItemRoutes = require("./routes/listitemroutes.js");
-const lotnoRoutes = require("./routes/lotnoroutes.js");
-const authRoutes = require("./routes/authroutes.js");
-const userRoutes = require("./routes/userroutes.js");
-const itemRoutes = require("./routes/itemroutes.js");
-
 // Middleware setup
 // Serve uploaded files statically
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
@@ -27,14 +18,18 @@ app.use(bodyParser.json());
 // Enable CORS
 app.use(cors());
 
+// Importing middleware to validate JWT
+const authenticateJWT = require("./middlewares/authenticateJWT.js");
+
 // Mount routes
-app.use("/", listItemRoutes);   // Routes for listing items
-app.use("/", bidItemRoutes);    // Routes for bidding on items
-app.use("/", auctionRoutes);     // Routes for auction items
-app.use("/", lotnoRoutes);      // Routes for lot numbers
-app.use("/", userRoutes);        // Routes for user management
-app.use("/", authRoutes);        // Routes for authentication
-app.use("/", itemRoutes);        // Routes for item details
+app.use("/", authenticateJWT); // Apply JWT authentication to all routes below this middleware
+app.use("/", require("./routes/auctionlistroutes.js")); // Routes for auction list
+app.use("/", require("./routes/bidcontroller.js")); // Routes for bidding on items
+app.use("/", require("./routes/listitemroutes.js")); // Routes for listing items
+app.use("/", require("./routes/lotnoroutes.js")); // Routes for lot numbers
+app.use("/", require("./routes/authroutes.js")); // Routes for authentication
+app.use("/", require("./routes/userroutes.js")); // Routes for user management
+app.use("/", require("./routes/itemroutes.js")); // Routes for item details
 
 // Connect to DB and start server
 connectToDB().then(() => {
