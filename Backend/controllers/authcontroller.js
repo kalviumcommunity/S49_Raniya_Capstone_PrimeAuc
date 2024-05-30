@@ -1,6 +1,7 @@
 const { UserModel } = require('../models/User.js');
 const { signUpSchema, loginSchema } = require('../validation/userValidation.js');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const signupUser = async (req, res) => {
   console.log(req.body);
@@ -30,7 +31,11 @@ const signupUser = async (req, res) => {
     });
 
     await newUser.save();
-    return res.status(201).json({ message: 'User created successfully', user: newUser });
+
+    // Generate JWT
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    return res.status(201).json({ message: 'User created successfully', user: newUser, token });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Internal Server Error' });
@@ -57,7 +62,10 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ error: 'Invalid password' });
     }
 
-    return res.status(200).json({ message: 'Login successful', user });
+    // Generate JWT
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    return res.status(200).json({ message: 'Login successful', user, token });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Internal Server Error' });
