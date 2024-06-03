@@ -6,13 +6,17 @@ const generateRandomNumber = () => {
     return Math.floor(Math.random() * 1000000).toString(); // Convert the number to a string
   };
 
+
+
+  
+
 const Login = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
-    token: generateRandomNumber()
+    userbid_no: generateRandomNumber()
   });
   const [passwordError, setPasswordError] = useState('');
   const [signupSuccess, setSignupSuccess] = useState(false);

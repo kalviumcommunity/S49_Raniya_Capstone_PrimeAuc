@@ -27,6 +27,7 @@ app.use("/", require("./routes/auctionlistroutes.js")); // Routes for auction li
 app.use("/", require("./routes/bidcontroller.js")); // Routes for bidding on items
 app.use("/", require("./routes/listitemroutes.js")); // Routes for listing items
 app.use("/", require("./routes/lotnoroutes.js")); // Routes for lot numbers
+app.use("/", require("./routes/userbidnoroutes.js")); // Routes for userbid numbers
 app.use("/", require("./routes/authroutes.js")); // Routes for authentication
 app.use("/", require("./routes/userroutes.js")); // Routes for user management
 app.use("/", require("./routes/itemroutes.js")); // Routes for item details

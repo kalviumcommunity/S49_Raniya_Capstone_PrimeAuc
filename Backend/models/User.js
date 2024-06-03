@@ -23,8 +23,8 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 6
   },
-  token:{
-    type: Number,
+  userbid_no:{
+    type: String,
     required: true,
 
   }
