@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import "../Styles/Login.css";
-const generateRandomNumber = () => {
-    return Math.floor(Math.random() * 1000000).toString(); // Convert the number to a string
-  };
-
+import { UniqueUserBidNo } from './UserBidNoGenerator';
 
 
   
@@ -16,10 +13,21 @@ const Login = () => {
     username: '',
     email: '',
     password: '',
-    userbid_no: generateRandomNumber()
+    userbid_no:''
   });
   const [passwordError, setPasswordError] = useState('');
   const [signupSuccess, setSignupSuccess] = useState(false);
+  const { generateNextNumber, loading } = UniqueUserBidNo();
+  useEffect(() => {
+    const fetchAndSetBidNo = async () => {
+      if (isSignUp) {
+        const newBidNo = await generateNextNumber();
+        setFormData(prevData => ({ ...prevData, userbid_no: `Biduser_${newBidNo}` }));
+      }
+    };
+
+    fetchAndSetBidNo();
+  }, [isSignUp]);
 
   const handleToggleForm = () => {
     setIsSignUp(!isSignUp);
@@ -65,6 +73,10 @@ const Login = () => {
       }
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div  className="box">
