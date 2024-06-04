@@ -21,10 +21,10 @@ app.use(cookieParser());
 app.use(cors());
 
 // Importing middleware to validate JWT
-// const authenticateJWT = require("./middlewares/authenticateJWT.js");
+const authenticateJWT = require("./middlewares/authenticateJWT.js");
 
 // Mount routes
-// app.use("/", authenticateJWT); // Apply JWT authentication to all routes below this middleware
+
 app.use("/", require("./routes/auctionlistroutes.js")); // Routes for auction list
 app.use("/", require("./routes/bidcontroller.js")); // Routes for bidding on items
 app.use("/", require("./routes/listitemroutes.js")); // Routes for listing items
