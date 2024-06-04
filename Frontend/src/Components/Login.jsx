@@ -76,6 +76,7 @@ const Login = () => {
         localStorage.setItem('username', response.data.user.username);
         localStorage.setItem('userId', response.data.user.userbid_no);
         alert('Login successful!');
+     
         navigate('/'); 
       }
     } catch (error) {
