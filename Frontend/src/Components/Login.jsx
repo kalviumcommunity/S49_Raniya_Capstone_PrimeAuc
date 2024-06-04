@@ -18,7 +18,6 @@ const Login = () => {
   const [signupSuccess, setSignupSuccess] = useState(false);
   const { generateNextNumber, loading } = UniqueUserBidNo();
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     const fetchAndSetBidNo = async () => {
@@ -63,6 +62,7 @@ const Login = () => {
         localStorage.setItem('username', response.data.user.username);
         localStorage.setItem('userId', response.data.user.userbid_no);
         setSignupSuccess(true);
+        
         alert('Signup successful!');
         navigate('/');
       } else {
@@ -75,7 +75,9 @@ const Login = () => {
         localStorage.setItem('token', token);
         localStorage.setItem('username', response.data.user.username);
         localStorage.setItem('userId', response.data.user.userbid_no);
+        setIsLoggedIn(true);
         alert('Login successful!');
+
      
         navigate('/'); 
       }

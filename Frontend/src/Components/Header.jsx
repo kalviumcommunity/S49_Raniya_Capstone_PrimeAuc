@@ -1,12 +1,15 @@
 import React, { useState,useEffect } from 'react';
 import { Link, useLocation ,useNavigate} from 'react-router-dom';
-import {  Avatar, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar,AppBar, IconButton, Menu, MenuItem } from '@mui/material';
+import {  Avatar, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar,AppBar, IconButton, Menu, MenuItem,Divider,
+  Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from "../assets/images/logo.png";
 import backgroundImage from "../assets/images/background.jpg"; 
 import sellBackgroundImage from "../assets/images/sellbackground.jpg"; 
 import "../Styles/Header.css";
 import default_profile from "../assets/images/defprof.jpg"
+import { Sell as SellIcon, Gavel  as AuctionIcon, Help as HelpIcon, Dashboard as DashboardIcon, Logout as LogoutIcon, Login as LoginIcon } from '@mui/icons-material'; // Import specific icons
+
 
 
 export default function App() {
@@ -38,9 +41,10 @@ export default function App() {
     
     if (storedToken) {
       setIsLoggedIn(true);
+    
     }
   }, []);
- 
+
   const handleLogout = () => {
     localStorage.removeItem('token'); // Remove token on logout
     localStorage.removeItem('username'); 
@@ -120,7 +124,7 @@ const toggleDrawer = (open) => (event) => {
         transformOrigin={{
           vertical: 'top',
           horizontal: 'right',
-        }}
+        }} sx={{ mt: 6 }}
       >
         <MenuItem onClick={handleClose} component={Link} to="/settings">Settings</MenuItem>
         <MenuItem onClick={() => { handleLogout(); handleClose(); }}>Logout</MenuItem>       
@@ -128,68 +132,71 @@ const toggleDrawer = (open) => (event) => {
 
 
 
-      
+      <Drawer
+        anchor='left'
+        open={open}
+        onClose={toggleDrawer(false)}
 
- <Drawer
-   anchor='left' // Adjust anchor position as needed
-   open={open}
-   onClose={toggleDrawer(false)}
- >
-   <Toolbar>
+
+      >
+        <br />
+<Toolbar>
+  
      <IconButton edge="start" color="inherit" aria-label="close" onClick={toggleDrawer(false)}>
-       {/* Add close icon here, if desired */}
+     <img src={logo} alt="Logo" className="logo small-logo" />
      </IconButton>
-   </Toolbar>
-   <List>
-    
-   
-   <ListItem  component={Link} to="/sell">
-       <ListItemIcon>
-         {/* Add icon for settings, if desired */}
-       </ListItemIcon>
-       <ListItemText primary="Sell" />
-     </ListItem>
-     <ListItem  component={Link} to="/auction-itemlist">
-       <ListItemIcon>
-         {/* Add icon for dashboard, if desired */}
-       </ListItemIcon>
-       <ListItemText primary="Auction" />
-     </ListItem>
-    
+    </Toolbar> <br />
+        <List>
+        <Divider sx={{ backgroundColor: '#333' }}/>
+          <ListItem button component={Link} to="/sell">
+            <ListItemIcon>
+              <SellIcon />
+            </ListItemIcon>
+            <ListItemText primary="Sell" />
+          </ListItem>
+          <Divider sx={{ backgroundColor: '#333' }}/>
+          <ListItem button component={Link} to="/auction-itemlist">
+            <ListItemIcon>
+              <AuctionIcon />
+            </ListItemIcon>
+            <ListItemText primary="Auction" />
+          </ListItem>
+          <Divider sx={{ backgroundColor: '#333' }}/>
+          <ListItem button component={Link} to="/help">
+            <ListItemIcon>
+              <HelpIcon />
+            </ListItemIcon>
+            <ListItemText primary="How it works" />
+          </ListItem>
+          <Divider sx={{ backgroundColor: '#333' }} />
+          <ListItem button component={Link} to="/dashboard">
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+          <Divider sx={{ backgroundColor: '#333' }} />
 
-     <ListItem  component={Link} to="/help">
-       <ListItemIcon>
-         {/* Add icon for dashboard, if desired */}
-       </ListItemIcon>
-       <ListItemText primary="How it works" />
-     </ListItem>
-     <ListItem  component={Link} to="/dashboard">
-       <ListItemIcon>
-         {/* Add icon for dashboard, if desired */}
-       </ListItemIcon>
-       <ListItemText primary="Dashboard" />
-     </ListItem>
+          {isLoggedIn ? (
+            <ListItem button onClick={handleLogout}>
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+            </ListItem>
+          ) : (
+            <ListItem button component={Link} to="/login">
+              <ListItemIcon>
+                <LoginIcon />
+              </ListItemIcon>
+              <ListItemText primary="Login" />
+            </ListItem>
+          )}
+        </List>
 
+        <Divider sx={{ backgroundColor: '#333' }} />
 
-     {isLoggedIn ? (
-  <>
-    <ListItem onClick={handleLogout}> 
-      <ListItemIcon>
-        {/* Add icon for logout, if desired */}
-      </ListItemIcon>
-      <ListItemText primary="Logout" />
-    </ListItem>
-  </>
-) : (
-  <ListItem component={Link} to="/login"> 
-    <ListItemIcon>
-      {/* Add icon for logout, if desired */}
-    </ListItemIcon>
-    <ListItemText primary="Login" />
-  </ListItem>
-)}
-   </List>
- </Drawer>
+      </Drawer>
     </div>
   );
 }
