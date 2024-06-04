@@ -7,6 +7,6 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
 
 router.put('/items', bidItemController.updateItemStatus);
 router.get('/biditems', bidItemController.getBidItems);
-router.post('/lots/:lot_no/bids', bidItemController.createBid);
+router.post('/lots/:lot_no/bids',authenticateJWT, bidItemController.createBid);
 
 module.exports = router;

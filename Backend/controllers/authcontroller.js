@@ -2,7 +2,8 @@ const { UserModel } = require('../models/User.js');
 const { signUpSchema, loginSchema } = require('../validation/userValidation.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+const cookieParser = require('cookie-parser'); 
+const jwtSecret = process.env.JWT_SECRET;
 const signupUser = async (req, res) => {
   console.log(req.body);
   try {
@@ -33,7 +34,8 @@ const signupUser = async (req, res) => {
     await newUser.save();
 
     // Generate JWT
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: newUser._id },jwtSecret, { expiresIn: '2h' });
+    res.cookie('jwt', token, { httpOnly: true, secure: true });
 
     return res.status(201).json({ message: 'User created successfully', user: newUser, token });
   } catch (err) {
@@ -64,7 +66,8 @@ const loginUser = async (req, res) => {
     }
 
     // Generate JWT
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: '2h' });
+    res.cookie('jwt', token, { httpOnly: true, secure: true });
 
     return res.status(200).json({ message: 'Login successful', user, token });
   } catch (err) {
