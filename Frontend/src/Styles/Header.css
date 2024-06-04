@@ -76,6 +76,7 @@
   }
 
   .navbar-end {
-    display: none; 
+    
+    margin-left: auto;
   }
 }
