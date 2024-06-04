@@ -147,11 +147,16 @@ function Bid() {
       amount: parseInt(bidAmount), // Convert bidAmount to an integer
       timestamp: timestamp,
     };
-
+    
     try {
       const response = await axios.post(
         `http://localhost:3000/lots/${lotno}/bids`,
-        bid
+        bid,{
+          headers: {
+          
+            Authorization: `Bearer ${localStorage.getItem('token')}`,},
+
+        }
       );
       setBidConfirmed(true); // Set bid confirmation to true after successful bid placement
       console.log("Bid placed:", response.data);

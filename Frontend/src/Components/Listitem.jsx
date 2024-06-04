@@ -173,6 +173,9 @@ export default function Listitem() {
         formDataToSend,
         {
           headers: {
+          
+            Authorization: `Bearer ${localStorage.getItem('token')}` , // Assuming token is stored in localStorage
+        
             "Content-Type": "multipart/form-data",
           },
         }

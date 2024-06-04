@@ -1,11 +1,10 @@
 import React, { useState,useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import "../Styles/Login.css";
 import { UniqueUserBidNo } from './UserBidNoGenerator';
 
 
-  
 
 const Login = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -18,6 +17,8 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState('');
   const [signupSuccess, setSignupSuccess] = useState(false);
   const { generateNextNumber, loading } = UniqueUserBidNo();
+  const navigate = useNavigate();
+  
 
   useEffect(() => {
     const fetchAndSetBidNo = async () => {
@@ -56,15 +57,26 @@ const Login = () => {
     console.log(formData);
     try {
       if (isSignUp) {
-        await axios.post('http://localhost:3000/signup', formData);
+        const response=await axios.post('http://localhost:3000/signup', formData);
+        const token = response.data.token; // Assuming the token is returned in the response data
+        localStorage.setItem('token', token);
+        localStorage.setItem('username', response.data.user.username);
+        localStorage.setItem('userId', response.data.user.userbid_no);
         setSignupSuccess(true);
         alert('Signup successful!');
+        navigate('/');
       } else {
         console.log("inside data",formData, formData.email);
         var email=formData.email;
         var password=formData.password;
-        await axios.post('http://localhost:3000/login', {email,password});
+        const response =await axios.post('http://localhost:3000/login', {email,password});
+        console.log(response.data)
+        const token = response.data.token; // Assuming the token is returned in the response data
+        localStorage.setItem('token', token);
+        localStorage.setItem('username', response.data.user.username);
+        localStorage.setItem('userId', response.data.user.userbid_no);
         alert('Login successful!');
+        navigate('/'); 
       }
     } catch (error) {
       console.error('Error:', error);

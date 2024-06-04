@@ -7,7 +7,7 @@ import Footer from "./Components/Footer";
 
 
 const App = () => {
-  localStorage.setItem("userId", "biduser1678"); 
+  
   return (
     <div className="app-wrapper d-flex flex-column">
       <Header />
@@ -21,11 +21,3 @@ const App = () => {
 
 export default App;
 
-
-{/* <div className="d-flex justify-content-center">
-  <CSpinner />
-</div> */}
-//       <CCallout color="primary">
-//         New to or unfamiliar with flexbox? Read this CSS Tricks flexbox guide for background,
-//         terminology, guidelines, and code snippets.
-//       </CCallout>
