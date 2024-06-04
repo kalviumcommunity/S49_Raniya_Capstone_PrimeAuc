@@ -18,11 +18,13 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState('');
   const [signupSuccess, setSignupSuccess] = useState(false);
   const { generateNextNumber, loading } = UniqueUserBidNo();
+
   useEffect(() => {
     const fetchAndSetBidNo = async () => {
       if (isSignUp) {
         const newBidNo = await generateNextNumber();
-        setFormData(prevData => ({ ...prevData, userbid_no: `Biduser_${newBidNo}` }));
+        console.log("Generated bid number for signup:", newBidNo);
+        setFormData(prevData => ({ ...prevData, userbid_no: `Biduser_BD${newBidNo}` }));
       }
     };
 
