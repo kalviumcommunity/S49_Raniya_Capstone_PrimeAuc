@@ -18,6 +18,7 @@ const Login = () => {
   const [signupSuccess, setSignupSuccess] = useState(false);
   const { generateNextNumber, loading } = UniqueUserBidNo();
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const fetchAndSetBidNo = async () => {
