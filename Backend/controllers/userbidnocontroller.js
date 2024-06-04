@@ -17,8 +17,16 @@ fs.readFile(userbidNosFilePath, 'utf8', (err, data) => {
   }
 });
 
-const getCurrentUserbidNos = (req, res) => {
-  res.json({ userbidNos });
+const getCurrentUserbidNos = async (req, res) => {
+  try {
+    const data = await fs.promises.readFile(userbidNosFilePath, 'utf8');
+    userbidNos = data.trim();
+    console.log(`Loaded bid number: ${userbidNos}`);
+    res.json({ userbidNos });
+  } catch (err) {
+    console.error("Error reading bid number file:", err);
+    res.status(500).json({ error: 'Failed to load userbidNos' });
+  }
 };
 
 const addUserbidNo = (req, res) => {

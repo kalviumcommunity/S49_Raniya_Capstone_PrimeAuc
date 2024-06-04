@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const connectToDB = require("./config/Connection.js");
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser'); 
 const path = require("path");
 const cors = require("cors");
 const fs = require("fs");
@@ -15,6 +16,7 @@ const app = express();
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 // Parse JSON requests
 app.use(bodyParser.json());
+app.use(cookieParser());
 // Enable CORS
 app.use(cors());
 

@@ -180,17 +180,18 @@ export default function Listitem() {
 
 
       console.log("Form submitted:", response.data);
+      setTimeout(() => {
+        setIsModalOpen(false);
+        setIsSubmitted(true);
+        navigate("/auctionitemlist"); // Redirect to /auctionitemlist
+      }, 4000);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
 
 
     setIsModalOpen(true);
-    setTimeout(() => {
-      setIsModalOpen(false);
-      setIsSubmitted(true);
-      navigate("/auctionitemlist"); // Redirect to /auctionitemlist
-    }, 4000);
+   
   };
 
 
