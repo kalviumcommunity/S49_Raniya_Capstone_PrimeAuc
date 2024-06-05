@@ -87,14 +87,14 @@ function HomeView() {
         </div>
       </div>
 
-      <div class="clearfix">
-        <div class="topheader">
-          <h1 class="V1">LOXERA AUCTIONS</h1>
+      <div className="clearfix">
+        <div className="topheader">
+          <h1 className="V1">LOXERA AUCTIONS</h1>
           <Link to="/auctionitemlist">
-            <h1 class="V2">VIEW ALL</h1>
+            <h1 className="V2">VIEW ALL</h1>
           </Link>
         </div>
-        <div class="clearfix-container">
+        <div className="clearfix-container">
           <CImage fluid rounded src={s1} width={300} height={300} />
 
           <CImage fluid rounded src={s2} width={300} height={200} />

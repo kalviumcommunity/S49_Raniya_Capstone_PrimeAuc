@@ -18,6 +18,7 @@ const Login = () => {
   const [signupSuccess, setSignupSuccess] = useState(false);
   const { generateNextNumber, loading } = UniqueUserBidNo();
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const fetchAndSetBidNo = async () => {
@@ -65,6 +66,8 @@ const Login = () => {
         
         alert('Signup successful!');
         navigate('/');
+        window.location.reload();
+
       } else {
         console.log("inside data",formData, formData.email);
         var email=formData.email;
@@ -80,6 +83,8 @@ const Login = () => {
 
      
         navigate('/'); 
+        window.location.reload();
+
       }
     } catch (error) {
       console.error('Error:', error);
