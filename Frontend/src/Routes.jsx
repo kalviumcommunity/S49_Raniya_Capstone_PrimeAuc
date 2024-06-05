@@ -10,7 +10,7 @@ import Listitem from './Components/Listitem';
 import Bid from './Components/Bid';
 import Aboutus from './Components/Aboutus';
 import Bidstats from './Components/Bidstats';
-import PrivateRoute from "./Components/PrivateRoute";
+import PrivateRoute from "./Components/Privateroute";
 
 function Routing() {
   return (
