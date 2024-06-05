@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { Link, useLocation ,useNavigate} from 'react-router-dom';
-import {  Avatar, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar,AppBar, IconButton, Menu, MenuItem,Divider,
+import { Button, Avatar, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar,AppBar, IconButton, Menu, MenuItem,Divider,
   Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from "../assets/images/logo.png";
@@ -139,15 +139,13 @@ const toggleDrawer = (open) => (event) => {
 
 
       >
-        <br />
-<Toolbar>
-  
-     <IconButton edge="start" color="inherit" aria-label="close" onClick={toggleDrawer(false)}>
-     <img src={logo} alt="Logo" className="logo small-logo" />
-     </IconButton>
-    </Toolbar> <br />
+       
+<Toolbar sx={{"backgroundColor": '#333'}}>
+
+     <img  onClick={toggleDrawer(false)}  src={logo} alt="Logo" className="logo small-logo" />
+   
+    </Toolbar> 
         <List>
-        <Divider sx={{ backgroundColor: '#333' }}/>
           <ListItem button component={Link} to="/sell">
             <ListItemIcon>
               <SellIcon />
@@ -155,7 +153,7 @@ const toggleDrawer = (open) => (event) => {
             <ListItemText primary="Sell" />
           </ListItem>
           <Divider sx={{ backgroundColor: '#333' }}/>
-          <ListItem button component={Link} to="/auction-itemlist">
+          <ListItem button component={Link} to="/auctionitemlist">
             <ListItemIcon>
               <AuctionIcon />
             </ListItemIcon>

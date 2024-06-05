@@ -66,6 +66,8 @@ const Login = () => {
         
         alert('Signup successful!');
         navigate('/');
+        window.location.reload();
+
       } else {
         console.log("inside data",formData, formData.email);
         var email=formData.email;
@@ -81,6 +83,8 @@ const Login = () => {
 
      
         navigate('/'); 
+        window.location.reload();
+
       }
     } catch (error) {
       console.error('Error:', error);
