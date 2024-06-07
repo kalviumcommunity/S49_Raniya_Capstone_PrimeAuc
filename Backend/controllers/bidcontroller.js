@@ -1,6 +1,7 @@
 // controllers/bidItemController.js
 const Auction = require('../models/AuctionItem.js');
-const { Lot, validateLot, validateBid } = require('../models/BidItem.js');
+const { Lot } = require('../models/BidItem.js');
+const { validateLot, validateBid}=require('../validation/bidValidation.js')
 
 
 const updateItemStatus = async (req, res) => {
