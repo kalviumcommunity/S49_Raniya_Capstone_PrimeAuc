@@ -5,7 +5,7 @@ const itemSchema = new Schema({
     title: String,
     description: String,
     lot_no: String,
-    image:{data:Buffer,type:String,required:true},
+    image: String,
     reserve_price: String,
     start_time: String,
     end_time: String,
