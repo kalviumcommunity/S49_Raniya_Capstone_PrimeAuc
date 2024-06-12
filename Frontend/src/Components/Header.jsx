@@ -126,7 +126,7 @@ const toggleDrawer = (open) => (event) => {
           horizontal: 'right',
         }} sx={{ mt: 6 }}
       >
-        <MenuItem onClick={handleClose} component={Link} to="/settings">Settings</MenuItem>
+        <MenuItem onClick={handleClose} component={Link} to="/profile">Profile</MenuItem>
         <MenuItem onClick={() => { handleLogout(); handleClose(); }}>Logout</MenuItem>       
       </Menu>
 

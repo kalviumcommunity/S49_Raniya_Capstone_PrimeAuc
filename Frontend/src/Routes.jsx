@@ -11,7 +11,7 @@ import Bid from './Components/Bid';
 import Aboutus from './Components/Aboutus';
 import Bidstats from './Components/Bidstats';
 import PrivateRoute from "./Components/Privateroute";
-
+import Profile from "./Components/Profile"
 function Routing() {
   return (
     <Routes>
@@ -25,6 +25,9 @@ function Routing() {
       <Route path="/itemdetails/:lotno" element={<ItemDetails />} />
       
       <Route path="/bidstats/:lotno" element={<Bidstats />} />
+
+
+      <Route path="/profile" element={< Profile/>} />
 
       {/* Use PrivateRoute as a wrapper for protected routes */}
       <Route element={<PrivateRoute />}>

@@ -3,6 +3,7 @@ import { Link ,useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import "../Styles/Login.css";
 import { UniqueUserBidNo } from './UserBidNoGenerator';
+import background from "../assets/images/loginimage.jpg";
 
 
 
@@ -101,6 +102,8 @@ const Login = () => {
   }
 
   return (
+    <div className='login-container'>
+     
     <div  className="box">
     <div className="login-page">
       {signupSuccess && (
@@ -151,6 +154,7 @@ const Login = () => {
       </div>
 
 
+      </div>
       </div>
       </div>
   );
