@@ -14,17 +14,17 @@ header {
 .navbar-nav {
   color: white;
   margin-right: 20px;
-} 
+}
 
 .main-content {
   padding: 20px;
 }
 
 .bg_primary {
-    background: #21689e;
-    color: #fff;
+  background: #21689e;
+  color: #fff;
 }
 
-.live{
+.live {
   color: azure;
 }

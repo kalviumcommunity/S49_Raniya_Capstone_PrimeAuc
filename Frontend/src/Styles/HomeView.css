@@ -28,11 +28,6 @@
   width: 100vw;
 */}
 
-/* .imagebox-container {
-  width: 100%;
-  box-sizing: border-box; /* Ensures padding and border are included in the width */
-  /* margin-bottom: 80px;
-  margin-left: 20px; */
 
 @media (max-width: 768px) {
   .imagecarousel {

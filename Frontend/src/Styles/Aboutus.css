@@ -1,82 +1,76 @@
-
 .text {
-    position: relative; /* Set position to relative */
-  }
-  
-  .pop {
-    position: absolute; /* Set position to absolute */
-    top: 0; /* Align to the top of the parent container */
-    /* Remove the translateX(-50%) transform */
-    z-index: 1; /* Ensure the animation is behind the text */
-  }
-  
-  
-  
+  position: relative; 
+}
+
+.pop {
+  position: absolute; 
+  top: 0; 
+  z-index: 1; 
+}
+
+.text h3 {
+  text-align: justify;
+  font-family: "Garamond", serif;
+  font-weight: 800;
+  line-height: 1.6;
+  word-spacing: 4px;
+  font-size: 1.2rem;
+  padding-bottom: 200px;
+  padding-left: 150px;
+  padding-right: 150px; 
+  z-index: 2; }
+
+.span1 {
+  font-size: 3.5em;
+  color: transparent;
+  font-weight: 700;
+  text-align: center;
+  padding: 150px;
+  padding-bottom: 80px;
+  z-index: 3; 
+}
+
+.span2 {
+  background-image: linear-gradient(rgb(20, 39, 117), rgb(186, 161, 32));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: sans-serif;
+}
+.popbottom {
+  z-index: 1;
+  bottom: 0;
+  position: absolute;
+}
+@media (max-width: 900px) {
   .text h3 {
-    text-align: justify;
-    font-family: "Garamond", serif;
-    font-weight: 800;
-    line-height: 1.6;
-    word-spacing: 4px;
-    font-size: 1.2rem;
-    padding-bottom: 200px;
-    padding-left: 150px; 
-    padding-right: 150px;/* Reduce padding to move the text more towards the top */
-    z-index: 2; /* Ensure the text is above the animations */
-    
+    padding: 0 50px 100px;
+    font-size: 1rem;
   }
-  
   .span1 {
-    font-size: 3.5em;
-    color: transparent;
-    font-weight: 700;
-    text-align: center;
-    padding: 150px;
-    padding-bottom: 80px;
-    z-index: 3; /* Ensure the span is above both the animations and the text */
+    font-size: 2.5em;
+    padding: 80px;
   }
-  
-  .span2 {
-    background-image: linear-gradient(rgb(20, 39, 117), rgb(186, 161, 32));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-family: sans-serif;
+}
+
+@media (max-width: 600px) {
+  .text h3 {
+    padding: 0 20px 80px;
+    font-size: 0.9rem;
   }
-  .popbottom{
-    z-index: 1;
-    bottom: 0;
-    position: absolute;
-    
+  .span1 {
+    font-size: 2em;
+    padding: 60px;
   }
-  @media (max-width: 900px) {
-    .text h3 {
-      padding: 0 50px 100px;
-      font-size: 1rem;
-    }
-    .span1 {
-      font-size: 2.5em;
-      padding: 80px;
-    }
+}
+
+@media (max-width: 400px) {
+  .text h3 {
+    padding: 0 10px 60px;
+    font-size: 0.8rem;
   }
-  
-  @media (max-width: 600px) {
-    .text h3 {
-      padding: 0 20px 80px;
-      font-size: 0.9rem;
-    }
-    .span1 {
-      font-size: 2em;
-      padding: 60px;
-    }
+  .span1 {
+    font-size: 1.2em;
+    padding: 40px;
   }
-  
-  @media (max-width: 400px) {
-    .text h3 {
-      padding: 0 10px 60px;
-      font-size: 0.8rem;
-    }
-    .span1 {
-      font-size: 1.2em;
-      padding: 40px;
-    }}
+}

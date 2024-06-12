@@ -4,8 +4,8 @@
 .login-page {
   width: 360px;
   margin: auto; 
-
 }
+
 .login-container{
   background-image:url('../assets/images/loginimage.jpg');
   box-sizing: border-box;
@@ -13,7 +13,6 @@
   padding:100px;
   max-width:1200px;
   min-height: 600px;
-
 }
 
 .form {

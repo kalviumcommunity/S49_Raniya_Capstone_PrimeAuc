@@ -1,82 +1,78 @@
 /* LoginButton.css */
 .login-button {
-    display: inline-block;
-    background: none;
-    border: none;
-    padding: 1em 1.5em;
-    font-size: 1.2em;
-    font-weight: 600;
-    font-family: inherit;
-    letter-spacing: .05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #F1EFE7;
-    transition: color .2s;
-    box-shadow: inset 0 0 0 3px #F1EFE7, 0 0 1px 1px rgba(0,0,0,.25);
-    text-shadow: 0 0 2px rgba(0,0,0,.5);
-    position: relative;
-    overflow: hidden;
-    transform: translateZ(0);
-    cursor: pointer;
-  }
-  
-  .login-button:before,
-  .login-button:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 3px solid transparent;
-    will-change: transform;
-    transition: transform .3s ease;
-    pointer-events: none;
-    transform: translateZ(0);
-  }
-  
-  .login-button:before {
-    border-color: #364F6B transparent;
-    transform: skew(-81deg,0);
-  }
-  
-  .login-button:after {
-    border-color: transparent #364F6B;
-    transform: skew(0,40deg);
-    transition: transform .4s;
-  }
-  
-  .login-button:hover {
-    color: #364F6B;
-  }
-  
-  .login-button:hover:before,
-  .login-button:hover:after {
-    transform: skew(0,0);
-  }
-
-
-.small-logo {
-  width: 190px; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
+  display: inline-block;
+  background: none;
+  border: none;
+  padding: 1em 1.5em;
+  font-size: 1.2em;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #f1efe7;
+  transition: color 0.2s;
+  box-shadow: inset 0 0 0 3px #f1efe7, 0 0 1px 1px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+  cursor: pointer;
 }
 
+.login-button:before,
+.login-button:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 3px solid transparent;
+  will-change: transform;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+  transform: translateZ(0);
+}
+
+.login-button:before {
+  border-color: #364f6b transparent;
+  transform: skew(-81deg, 0);
+}
+
+.login-button:after {
+  border-color: transparent #364f6b;
+  transform: skew(0, 40deg);
+  transition: transform 0.4s;
+}
+
+.login-button:hover {
+  color: #364f6b;
+}
+
+.login-button:hover:before,
+.login-button:hover:after {
+  transform: skew(0, 0);
+}
+
+.small-logo {
+  width: 190px;
+  height: auto;
+}
 
 .navbar-item {
   flex: 1;
   display: flex;
   justify-content: space-evenly;
   font-size: largeR;
-} 
-
+}
 
 @media screen and (max-width: 768px) {
   .navbar-item {
-   display:none;
+    display: none;
   }
 
   .navbar-end {
-    
     margin-left: auto;
   }
 }

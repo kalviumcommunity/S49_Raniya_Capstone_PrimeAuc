@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Chart from "./Chart";
 
+
 function Bidstats() {
   const { lotno } = useParams();
   const [lotBids, setLotBids] = useState([]);

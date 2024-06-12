@@ -1,7 +1,7 @@
 .grid-container {
   text-align: center;
   font-family: "Garamond", serif;
-  font-weight:800;
+  font-weight: 800;
   line-height: 1.6;
   word-spacing: 4px;
   font-size: 1.8rem;
@@ -20,7 +20,7 @@
   border: 1.5px solid darkred;
   border-radius: 5px;
   background-color: darkred;
-  margin:20px;
+  margin: 20px;
 }
 
 .grid-container a:hover {
@@ -28,104 +28,101 @@
   color: darkred;
 }
 
-
-
-  .gold-bg {
-    background-color: rgba(133, 101, 20, 0.829);
-  }
-  
-  .grey-bg {
-    background-color:rgba(139, 0, 0, 0.858);
-  }
-  
-  .step-box h2 {
-    color: red; /* Highlighted color */
-  }
-  
-.container{
-  margin-bottom:100px;
+.gold-bg {
+  background-color: rgba(133, 101, 20, 0.829);
 }
 
-.highlight{
+.grey-bg {
+  background-color: rgba(139, 0, 0, 0.858);
+}
+
+.step-box h2 {
+  color: red;
+}
+
+.container {
+  margin-bottom: 100px;
+}
+
+.highlight {
   color: blanchedalmond;
 }
 .col-md-6 h2 {
   font-size: 2em;
-  color: transparent; /* Set text color to transparent */
+  color: transparent;
   padding: 20px;
   font-weight: 500;
-  text-shadow: 
-    -1px -1px 0 blanchedalmond,  
-    1px -1px 0 blanchedalmond,
-    -1px 1px 0 blanchedalmond,
-    1px 1px 0 blanchedalmond,
-    0px 0px 5px rgba(255, 182, 193, 0.5); /* Adjust the color and size for the glow effect */
-  background: linear-gradient(to right, #0000 0%, #0000 49%, blanchedalmond 50%, blanchedalmond 100%);
-  -webkit-background-clip: text; /* For Safari */
+  text-shadow: -1px -1px 0 blanchedalmond, 1px -1px 0 blanchedalmond,
+    -1px 1px 0 blanchedalmond, 1px 1px 0 blanchedalmond,
+    0px 0px 5px rgba(255, 182, 193, 0.5);
+  background: linear-gradient(
+    to right,
+    #0000 0%,
+    #0000 49%,
+    blanchedalmond 50%,
+    blanchedalmond 100%
+  );
+  -webkit-background-clip: text;
   background-clip: text;
 }
-.header1{
+.header1 {
   font-size: 2.5em;
-  color: transparent; /* Set text color to transparent */
+  color: transparent;
   font-weight: 400;
-  text-shadow: 
-    -1px -1px 0 blanchedalmond,  
-    1px -1px 0 blanchedalmond,
-    -1px 1px 0 blanchedalmond,
-    1px 1px 0 blanchedalmond,
-    0px 0px 5px rgba(255, 182, 193, 0.5); /* Adjust the color and size for the glow effect */
-  background: linear-gradient(to right, #0000 0%, #0000 49%, blanchedalmond 50%, blanchedalmond 100%);
-  -webkit-background-clip: text; /* For Safari */
+  text-shadow: -1px -1px 0 blanchedalmond, 1px -1px 0 blanchedalmond,
+    -1px 1px 0 blanchedalmond, 1px 1px 0 blanchedalmond,
+    0px 0px 5px rgba(255, 182, 193, 0.5);
+  background: linear-gradient(
+    to right,
+    #0000 0%,
+    #0000 49%,
+    blanchedalmond 50%,
+    blanchedalmond 100%
+  );
+  -webkit-background-clip: text;
   background-clip: text;
-
 }
 
 .header2 {
   font-size: 2.9em;
-  color: transparent; /* Set text color to transparent */
+  color: transparent;
   font-weight: 700;
   text-align: center;
-  -webkit-background-clip: text; /* For Safari */
-  background-clip: text; /* Apply background only to the text */
+  -webkit-background-clip: text;
+  background-clip: text;
   padding: 20px;
   margin-bottom: 80px;
-  background-image: linear-gradient( rgb(126, 2, 2), rgb(186, 112, 0)); /* Gradient background */
+  background-image: linear-gradient(rgb(126, 2, 2), rgb(186, 112, 0));
 }
 
-
-.col-md-6 button{
- margin: 20px;
+.col-md-6 button {
+  margin: 20px;
   padding: 10px;
-  
 }
-.col-md-6 button:hover{
- 
+.col-md-6 button:hover {
   background-color: blanchedalmond;
 }
-.col-md-6 p{
+.col-md-6 p {
   margin: 10px;
-   padding: 10px;
-   font-size: 1.2rem;
-   flex: 1;
- }
+  padding: 10px;
+  font-size: 1.2rem;
+  flex: 1;
+}
 
-
- .container2{
+.container2 {
   margin: 50px;
- }
+}
 
-
- @media  (max-width: 768px) {
-  .header2{
+@media (max-width: 768px) {
+  .header2 {
     font-size: 1.8rem;
   }
-  .grid-container{
+  .grid-container {
     font-size: 1.2rem;
   }
- }
+}
 
-
- .lottiecontainer {
+.lottiecontainer {
   max-width: 100px;
   max-height: 100px;
 }
@@ -134,11 +131,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 90%; /* Ensure the box takes full height of the parent */
-
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
- 
-  
+  height: 90%;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
