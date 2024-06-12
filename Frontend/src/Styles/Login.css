@@ -6,10 +6,15 @@
   margin: auto; 
 
 }
-.box{
-  margin-top: 200px; 
-}
+.login-container{
+  background-image:url('../assets/images/loginimage.jpg');
+  box-sizing: border-box;
+  margin:100px;
+  padding:100px;
+  max-width:1200px;
+  min-height: 600px;
 
+}
 
 .form {
     position: relative;
