@@ -76,7 +76,45 @@ const loginUser = async (req, res) => {
   }
 };
 
+
+const updatePassword = async (req, res) => {
+  const { userbid_no, currentPassword, newPassword } = req.body;
+
+  try {
+    // Find the user by userbid_no
+    const user = await UserModel.findOne({ userbid_no });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Check if the current password matches
+    const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ error: 'Invalid current password' });
+    }
+
+    // Generate a salt
+    const salt = await bcrypt.genSalt(10);
+
+    // Hash the new password with the generated salt
+    const hashedNewPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update the user's password
+    user.password = hashedNewPassword;
+    await user.save();
+
+    return res.status(200).json({ message: 'Password updated successfully' });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
+
+
 module.exports = {
   signupUser,
-  loginUser
+  loginUser,
+  updatePassword,
 };
