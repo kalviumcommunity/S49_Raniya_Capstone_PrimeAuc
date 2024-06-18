@@ -1,0 +1,19 @@
+meta {
+  name: Status
+  type: http
+  seq: 6
+}
+
+put {
+  url: http://localhost:3000/items
+  body: json
+  auth: none
+}
+
+body:json {
+  {"lot_no":"2024JT001",
+    "status": "Closed"
+   
+  
+  }
+}
