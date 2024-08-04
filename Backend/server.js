@@ -33,7 +33,7 @@ app.use("/", require("./routes/userbidnoroutes.js")); // Routes for userbid numb
 app.use("/", require("./routes/authroutes.js")); // Routes for authentication
 app.use("/", require("./routes/userroutes.js")); // Routes for user management
 app.use("/", require("./routes/itemroutes.js")); // Routes for item details
-
+app.use('/', require("./routes/bookingroutes.js"));
 // Connect to DB and start server
 connectToDB().then(() => {
   // Start the Express server

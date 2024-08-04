@@ -11,7 +11,8 @@ import Bid from './Components/Bid';
 import Aboutus from './Components/Aboutus';
 import Bidstats from './Components/Bidstats';
 import PrivateRoute from "./Components/Privateroute";
-import Profile from "./Components/Profile"
+import Profile from "./Components/Profile";
+import Checkout from "./Components/Checkout";
 function Routing() {
   return (
     <Routes>
@@ -25,6 +26,7 @@ function Routing() {
       <Route path="/itemdetails/:lotno" element={<ItemDetails />} />
       
       <Route path="/bidstats/:lotno" element={<Bidstats />} />
+      <Route path="/checkout-success" element={<Checkout />} />
 
 
       
