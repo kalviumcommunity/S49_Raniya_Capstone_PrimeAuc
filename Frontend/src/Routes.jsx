@@ -13,6 +13,7 @@ import Bidstats from './Components/Bidstats';
 import PrivateRoute from "./Components/Privateroute";
 import Profile from "./Components/Profile";
 import Checkout from "./Components/Checkout";
+import Pay from "./Components/Pay";
 function Routing() {
   return (
     <Routes>
@@ -27,6 +28,7 @@ function Routing() {
       
       <Route path="/bidstats/:lotno" element={<Bidstats />} />
       <Route path="/checkout-success" element={<Checkout />} />
+      <Route path="/payment" element={<Pay />} />
 
 
       

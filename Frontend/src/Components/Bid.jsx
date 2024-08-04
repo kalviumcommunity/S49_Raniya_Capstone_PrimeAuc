@@ -18,7 +18,10 @@ import ToastComponent from "./Toast";
 import Chart from "./Chart";
 import ImageCover from "./Image";
 import load from "../assets/animations/load.json";
+
 function Bid() {
+
+  const userBidNo = localStorage.getItem('userId');
   const { lotno } = useParams();
   const navigate = useNavigate(); // Use the useNavigate hook for navigation
 
@@ -35,6 +38,9 @@ function Bid() {
   const [activeTab, setActiveTab] = useState("graph");
 
   const lottieContainer = useRef(null);
+
+
+
   useEffect(() => {
     if (!latestBid) {
       const animation = lottie.loadAnimation({
@@ -58,11 +64,18 @@ function Bid() {
   useEffect(() => {
     if (countdownEnded) {
       const timeout = setTimeout(() => {
-        navigate(`/bidstats/${lotno}`);
+        if (userBidNo === latestBid.userbid_no) {
+          navigate('/payment');
+        } else {
+          // Show a message indicating the user didn't win
+          console.log('You did not win the bid.');
+          navigate(`/bidstats/${lotno}`);
+        }
       }, 2000);
+
       return () => clearTimeout(timeout);
     }
-  }, [countdownEnded, navigate, lotno]);
+  }, [countdownEnded, navigate, lotno, userBidNo]);
 
   useEffect(() => {
     if (bidConfirmed) {
@@ -185,6 +198,9 @@ function Bid() {
     Click here for auction terms and conditions
   </Link>
 </div>
+
+
+
             <div className="auction-container">
       <div className="column">
         {item && item.status !== "upcoming" && item.status !== "Upcoming" ? (
