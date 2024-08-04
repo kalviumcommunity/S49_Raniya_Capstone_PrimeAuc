@@ -4,7 +4,11 @@ const { Schema } = mongoose;
 const itemSchema = new Schema({
     title: String,
     description: String,
-    lot_no: String,
+    lot_no: {
+        type: String,
+        required: true,
+        unique: true, // Added unique constraint
+      },
     image: String,
     reserve_price: String,
     start_time: String,
