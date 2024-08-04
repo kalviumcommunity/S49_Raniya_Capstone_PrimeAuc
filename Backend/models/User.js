@@ -23,10 +23,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 6
   },
-  userbid_no:{
+  userbid_no: {
     type: String,
     required: true,
-
+    unique: true, // Added unique constraint
   }
 });
 
