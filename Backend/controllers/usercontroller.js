@@ -12,6 +12,23 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+
+const getUserByBidNo = async (req, res) => {
+  const { userbid_no } = req.query;
+  try {
+    const user = await UserModel.findOne({ userbid_no });
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
-  getAllUsers
+  getAllUsers,
+  getUserByBidNo
 };

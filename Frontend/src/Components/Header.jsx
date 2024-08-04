@@ -167,7 +167,7 @@ const toggleDrawer = (open) => (event) => {
             <ListItemText primary="How it works" />
           </ListItem>
           <Divider sx={{ backgroundColor: '#333' }} />
-          <ListItem button component={Link} to="/dashboard">
+          <ListItem button component={Link} to="/profile">
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>

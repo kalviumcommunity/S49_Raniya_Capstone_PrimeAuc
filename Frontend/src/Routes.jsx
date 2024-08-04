@@ -27,12 +27,13 @@ function Routing() {
       <Route path="/bidstats/:lotno" element={<Bidstats />} />
 
 
-      <Route path="/profile" element={< Profile/>} />
+      
 
       {/* Use PrivateRoute as a wrapper for protected routes */}
       <Route element={<PrivateRoute />}>
         <Route path="/sell/listitem" element={<Listitem />} />
         <Route path="/bid/:lotno" element={<Bid />} />
+        <Route path="/profile" element={< Profile/>} />
       </Route>
     </Routes>
   );
