@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import "../Styles/Profile.css";
 import axios from 'axios';
+import default_profile from "../assets/images/defprof.jpg";
+
 
 function ProfilePage() {
   const [userbid_no, setuserbid_no] = useState('');
@@ -8,6 +10,11 @@ function ProfilePage() {
   const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState('');
   const [activeTab, setActiveTab] = useState('profile'); // Added state for active tab
+
+
+  const [userData, setUserData] = useState(null); // State for user data
+const [showPassword, setShowPassword] = useState(false); // State to show/hide password
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,10 +34,28 @@ function ProfilePage() {
 
   useEffect(() => {
     const storeduserbid_no = localStorage.getItem('userId');
+    console.log('userbid_no from localStorage:', storeduserbid_no);
     if (storeduserbid_no) {
       setuserbid_no(storeduserbid_no);
     }
   }, []);
+
+  useEffect(() => {
+    if (activeTab === 'profile') {
+      const fetchUserData = async () => {
+        try {
+          console.log('Fetching data for userbid_no:', userbid_no);
+          const response = await axios.get('http://localhost:3000/user', { params: { userbid_no } });
+          setUserData(response.data);
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      };
+  
+      fetchUserData();
+    }
+  }, [activeTab, userbid_no]);
+  
 
   return (
     <div style={{ display: "flex" }}>
@@ -86,6 +111,19 @@ function ProfilePage() {
       </div>
 
       <div className="content">
+      {activeTab === 'profile' && userData && (
+  <div id="userDetailsDiv">
+    <h2>User Details</h2>
+    <img src={default_profile} alt="Profile" className="profile-image" />
+    <p><strong>Username:</strong> {userData.username}</p>
+    <p><strong>Registered Email Id :</strong> {userData.email}</p>
+    <p><strong>Unique User Bid Number:</strong> {userData.userbid_no}</p>
+  </div>
+)}
+
+
+
+
         {activeTab === 'changePassword' && (
           <div id="updatePasswordDiv">
             <h2>Update Password</h2>
